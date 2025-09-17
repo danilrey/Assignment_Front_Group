@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Seaweed+Script&display=swap');
 
 body {
     margin: 0;
-    font-family: "Seaweed Script",Arial, sans-serif;
+    font-family: "Luckiest Guy",Arial, sans-serif;
+    overflow-x: hidden;
 }
 
-.seaweed-script-regular {
-    font-family: "Seaweed Script", cursive;
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
     font-weight: 400;
     font-style: normal;
 }
+
 
 nav {
     width: 220px;
@@ -55,5 +57,7 @@ nav ul li a:hover {
 
 footer {
     position: relative;
-    left: 220px;
+    left: 240px;
+    font-size: 16px;
+    margin-top: 100px;
 }
