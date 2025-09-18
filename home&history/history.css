@@ -1,0 +1,28 @@
+br {
+    margin-bottom: 28px;
+}
+
+
+span {
+    background-color: #bbdfd1;
+    padding: 6px 6px 0 6px;
+    border-radius: 4px;
+}
+
+.citation {
+    margin: 30px 0 30px 40px;
+    font-size: 20px;
+    font-style: italic;
+    text-decoration: underline 2px solid #719870;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+hr {
+    width: 45%;
+    margin: 20px 0 50px 0 ;
+    border: 1px solid #ea9999;
+}
