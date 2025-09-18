@@ -4,7 +4,7 @@ img {
     position: absolute;
     left: 850px;
     bottom: 400px;
-    border-radius: 100px;
+    border-radius: 50%;
 }
 
 .info {
