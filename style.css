@@ -1,14 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Seaweed+Script&display=swap');
 
 body {
     margin: 0;
-    font-family: "Luckiest Guy", Arial, sans-serif;
-    display: grid;
-    grid-template-areas: 
-        "nav main"
-        "nav footer";
-    grid-template-columns: 200px 1fr;
-    min-height: 100vh;
+    font-family: "Luckiest Guy",Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .luckiest-guy-regular {
@@ -17,28 +12,35 @@ body {
     font-style: normal;
 }
 
-/* === FLEXBOX NAVIGATION === */
+
 nav {
-    grid-area: nav;
+    width: 220px;
     background: #f0e68c;
-    padding: 20px 0;
+    height: 100vh;
+    padding-top: 30px;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+}
+
+nav ul li {
+    margin: 20px 0;
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
-    padding: 10px 15px;
+    font-size: 18px;
+    padding: 8px 16px;
     display: block;
-    transition: background 0.3s;
+    border-radius: 4px;
+    transition: background 0.2s;
 }
 
 nav ul li a.active,
@@ -46,101 +48,22 @@ nav ul li a:hover {
     background: #ffe4b5;
 }
 
-/* === MAIN CONTENT === */
 .main-content {
-    grid-area: main;
-    padding: 20px;
+    position: relative;
+    left: 220px;
+    padding: 40px;
+    min-height: 100vh;
 }
 
-/* === FLEXBOX CARDS === */
-.card {
-    background: white;
-    border: 2px solid #f0e68c;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px 0;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s;
+.footer-name {
+    margin-right: 16px;
+    display: inline-block;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-}
-
-/* === FOOTER === */
 footer {
-    grid-area: footer;
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
-
-/* === MOBILE RESPONSIVE === */
-@media (max-width: 768px) {
-    body {
-        grid-template-areas: 
-            "nav"
-            "main"
-            "footer";
-        grid-template-columns: 1fr;
-    }
-    
-    nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-/* Базовые размеры для десктопа */
-body {
+    position: relative;
+    left: 240px;
     font-size: 16px;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-p {
-    font-size: 1rem;
-}
-
-/* Планшеты */
-@media (max-width: 768px) {
-    body {
-        font-size: 18px; /* Увеличиваем базовый размер */
-    }
-    
-    h1 {
-        font-size: 2.8rem; /* Увеличиваем заголовки */
-    }
-    
-    h2 {
-        font-size: 2.2rem;
-    }
-}
-
-/* Мобильные устройства */
-@media (max-width: 576px) {
-    body {
-        font-size: 20px; /* Еще больше на маленьких экранах */
-    }
-    
-    h1 {
-        font-size: 3rem;
-    }
-    
-    h2 {
-        font-size: 2.5rem;
-    }
-    
-    p {
-        font-size: 1.1rem;
-    }
+    margin-top: 40px;
+    margin-bottom: 10px;
 }
