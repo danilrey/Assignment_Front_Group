@@ -1,0 +1,42 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+}
+
+
+
+/* Левое меню */
+nav {
+    width: 200px;
+    min-height: 10000vh;       /* тянется на всю высоту */
+    background-color: #ffd84d;
+    float: left;             /* прижимаем влево */
+    padding-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 15px 0;
+}
+
+nav a {
+    display: block;
+    padding: 10px 16px;
+    font-weight: bold;       /* толстый текст */
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a.active {
+    background: #fff7a6;     /* чуть светлее при наведении */
+    border-radius: 6px;
+}
