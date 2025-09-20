@@ -7,36 +7,122 @@
 
 
 
-/* Левое меню */
-nav {
-    width: 200px;
-    min-height: 10000vh;       /* тянется на всю высоту */
-    background-color: #ffd84d;
-    float: left;             /* прижимаем влево */
-    padding-top: 20px;
-}
 
-nav ul {
-    list-style: none;
+/* сброс */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-nav li {
-    margin: 15px 0;
+/* === Step 2: Element selector === */
+body {
+    font-family: Arial, sans-serif;
+    font-weight: 900;           /* очень толстый текст для всего */
+    background-color: #f7fafc;  /* мягкий фон */
+    color: #111;
 }
 
+/* заголовки */
+h1, h2, h3 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* === Step 2: Class selector === */
+.banner {
+    background: #fff5cc;
+    padding: 20px;
+    border: 2px solid #ffe680;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* === Step 2: ID selector === */
+#top-banner {
+    text-align: center;
+    background: #fffacd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* === Step 2: Descendant selector === */
 nav a {
     display: block;
     padding: 10px 16px;
-    font-weight: bold;       /* толстый текст */
+    font-weight: 900;
     font-size: 18px;
     color: #333;
     text-decoration: none;
+    transition: background 0.3s;
 }
 
 nav a:hover,
 nav a.active {
-    background: #fff7a6;     /* чуть светлее при наведении */
+    background: #fff7a6;
     border-radius: 6px;
+}
+
+/* === Step 4: Colors & Backgrounds === */
+section {
+    background: #ffffff;
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+}
+
+/* === Step 5: Box model demo === */
+.products {
+    margin: 20px;
+    padding: 20px;
+    border: 2px dashed #ccc;
+}
+
+/* === Step 7: Images === */
+img {
+    width: 250px;
+    height: auto;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+/* одна картинка круглая */
+.round {
+    border-radius: 50%;
+    border: 5px solid #ffd84d;
+}
+
+/* === Step 8: Form === */
+form input,
+form textarea,
+form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-weight: 900; /* толстый текст и тут */
+}
+
+form button {
+    background: #719870;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+form button:hover {
+    background: #5a7a5a;
+}
+
+/* === Step 9: Advanced === */
+h2::before {
+    content: "★ ";
+    color: gold;
+}
+
+/* плавный эффект на картинках */
+img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
 }
