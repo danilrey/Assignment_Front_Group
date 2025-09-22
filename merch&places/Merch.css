@@ -1,35 +1,48 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    top: 0px;
-    left: 0px;
-}
 
 
-
-
-/* сброс */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* === Step 2: Element selector === */
-body {
-    font-family: Arial, sans-serif;
-    font-weight: 900;           /* очень толстый текст для всего */
-    background-color: #f7fafc;  /* мягкий фон */
-    color: #111;
+.main-content .main-content{
+  left: 0 !important;
+  padding: 0 0px !important; /* это для отсупа и без багов */
 }
 
-/* заголовки */
+/* все картинки квадратные */
+img {
+    width: 250px;
+    height: auto;
+    margin: 10px;
+    border-radius: 0 !important;   /* !important перебивает круглый стиль */
+}
+
+/* одна картинка круглая */
+.round {
+    border-radius: 50% !important;
+    border: 5px solid #ffd84d;
+}
+
+
+/* Выбор Элементалника */
+body {
+    background-color: #f7fafc;  /* мягкий фон))) */
+    color: #111;
+    font-style: italic;
+    font-size: 18px;
+    text-decoration: underline 2px solid #719870;
+    margin: 30px 0 30px 40px;
+}
+
+/* зголовки */
 h1, h2, h3 {
     margin: 20px 0;
     text-align: center;
 }
 
-/* === Step 2: Class selector === */
+/* Селекторы */
 .banner {
     background: #fff5cc;
     padding: 20px;
@@ -38,7 +51,7 @@ h1, h2, h3 {
     margin: 20px;
 }
 
-/* === Step 2: ID selector === */
+/* еще селектор */
 #top-banner {
     text-align: center;
     background: #fffacd;
@@ -46,7 +59,7 @@ h1, h2, h3 {
     border-radius: 8px;
 }
 
-/* === Step 2: Descendant selector === */
+/* Еще еще селектор */
 nav a {
     display: block;
     padding: 10px 16px;
@@ -54,7 +67,7 @@ nav a {
     font-size: 18px;
     color: #333;
     text-decoration: none;
-    transition: background 0.3s;
+    transition: background-color 0.3s;
 }
 
 nav a:hover,
@@ -63,7 +76,7 @@ nav a.active {
     border-radius: 6px;
 }
 
-/* === Step 4: Colors & Backgrounds === */
+/* Цвет и орентация фона */
 section {
     background: #ffffff;
     margin: 20px;
@@ -72,19 +85,20 @@ section {
     border-radius: 8px;
 }
 
-/* === Step 5: Box model demo === */
+/* коробка */
 .products {
     margin: 20px;
     padding: 20px;
     border: 2px dashed #ccc;
 }
 
-/* === Step 7: Images === */
+/* Фото */
 img {
     width: 250px;
     height: auto;
     margin: 10px;
-    border-radius: 12px;
+    border-radius: 50%;
+    
 }
 
 /* одна картинка круглая */
@@ -93,7 +107,7 @@ img {
     border: 5px solid #ffd84d;
 }
 
-/* === Step 8: Form === */
+/* Форма */
 form input,
 form textarea,
 form button {
@@ -109,19 +123,19 @@ form button {
     background: #719870;
     color: #fff;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s;
 }
 form button:hover {
     background: #5a7a5a;
 }
 
-/* === Step 9: Advanced === */
+/* Адвансед типо */
 h2::before {
     content: "★ ";
     color: gold;
 }
 
-/* плавный эффект на картинках */
+/* плавный эффект на картинках , типо про */
 img:hover {
     transform: scale(1.05);
     transition: transform 0.3s;
