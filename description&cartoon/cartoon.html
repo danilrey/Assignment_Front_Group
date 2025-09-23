@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="cartoon.css">
 </head>
 <body>
     <nav>
@@ -20,11 +21,109 @@
     </nav>
 
     <div class="main-content">
-        <!-- WRITE YOUR HTML HERE AND STYLE IT BY YOURSELF-->
+        <section class="card" id="intro">
+      <h1>Main Characters</h1>
+      <p>Meet the core crew of <strong>SpongeBob SquarePants</strong>. Click a name to jump to a character. At the end, pick your favorite!</p>
+      <p class="mini-nav">
+        <a href="#spongebob">SpongeBob</a> ·
+        <a href="#patrick">Patrick</a> ·
+        <a href="#squidward">Squidward</a> ·
+        <a href="#sandy">Sandy</a> ·
+        <a href="#krabs">Mr. Krabs</a> ·
+        <a href="#plankton">Plankton</a>
+      </p>
+    </section>
+
+   
+    <section class="card" id="characters">
+      <div class="grid">
+        <article class="character" id="spongebob">
+        <img src="../Images/bob.jpg" alt="SpongeBob" class="circle">
+          <h3>SpongeBob SquarePants</h3>
+          <p class="role">Optimistic fry cook at the Krusty Krab.</p>
+          <ul class="traits">
+            <li>Endlessly positive</li>
+            <li>Loves jellyfishing</li>
+            <li>Catchphrase: “I’m ready!”</li>
+          </ul>
+        </article>
+
+       <!-- Patrick Star -->
+<article class="character" id="patrick">
+    <img src="../Images/patric.jpg" alt="Patrick" class="circle">
+    <h3>Patrick Star</h3>
+    <p class="role">SpongeBob’s best friend and neighbor.</p>
+    ...
+</article>
+
+        <article class="character" id="squidward">
+         <img src="../Images/sqrd.jpg" alt="Squidward" class="circle">
+          <h3>Squidward Tentacles</h3>
+          <p class="role">Cashier at the Krusty Krab; clarinet player.</p>
+          <ul class="traits">
+            <li>Sarcastic and artsy</li>
+            <li>Values peace & quiet</li>
+            <li>Secretly cares (sometimes!)</li>
+          </ul>
+        </article>
+
+        <article class="character" id="sandy">
+        <img src="../Images/sandy.jpg" alt="Sandy" class="circle">
+          <h3>Sandy Cheeks</h3>
+          <p class="role">Texan squirrel; scientist and karate expert.</p>
+          <ul class="traits">
+            <li>Inventive & brave</li>
+            <li>Karate with SpongeBob</li>
+            <li>Loves science challenges</li>
+          </ul>
+        </article>
+
+        <!-- Mr. Krabs -->
+<article class="character" id="krabs">
+    <img src="../Images/crab.jpg" alt="Mr. Krabs" class="circle">
+    <h3>Mr. Krabs</h3>
+    <p class="role">Owner of the Krusty Krab.</p>
+    ...
+</article>
+
+        <article class="character" id="plankton">
+        <img src="../Images/plankton.jpg" alt="Plankton" class="circle">
+          <h3>Plankton</h3>
+          <p class="role">Owner of the Chum Bucket; Krabs’ rival.</p>
+          <ul class="traits">
+            <li>Genius but tiny</li>
+            <li>Always schemes</li>
+            <li>Has computer wife Karen</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+
+
+    <section class="card" id="favorite">
+      <h2>Pick Your Favorite Character</h2>
+      <form>
+        <fieldset class="choices">
+          <legend>Choose one:</legend>
+          <label><input type="radio" name="favorite" value="SpongeBob" required> SpongeBob</label>
+          <label><input type="radio" name="favorite" value="Patrick"> Patrick</label>
+          <label><input type="radio" name="favorite" value="Squidward"> Squidward</label>
+          <label><input type="radio" name="favorite" value="Sandy"> Sandy</label>
+          <label><input type="radio" name="favorite" value="Mr. Krabs"> Mr. Krabs</label>
+          <label><input type="radio" name="favorite" value="Plankton"> Plankton</label>
+        </fieldset>
+
+        <label for="why">Why is this your favorite?</label>
+        <textarea id="why" name="why" rows="4" placeholder="Short reason (optional)"></textarea>
+
+        <input type="submit" value="Submit">
+      </form>
+    </section> 
     </div>
 
     <footer>
-        <div>Designed by Motivation Time members:</div>
+        <div>Designed by Motivation Time members:Danila, Dana, Zhandaulet, Alan</div>
     </footer>
 
 </body>

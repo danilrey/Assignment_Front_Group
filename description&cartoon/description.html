@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Description — New Viewer’s Guide</title>
+
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="description.css">
 </head>
-<body>
+<body class="page-description">
+
     <nav>
         <ul>
             <li><a href="../home&history/home.html">Home</a></li>
@@ -20,11 +25,108 @@
     </nav>
 
     <div class="main-content">
-        <!-- WRITE YOUR HTML HERE AND STYLE IT BY YOURSELF-->
+        
+    <section class="card" id="about">
+      <h1>New Viewer’s Guide</h1>
+      <img src="../Images/pineapple.jpg" alt="SpongeBob's Pineapple House" class="circle center-image" />
+      <p><strong>SpongeBob SquarePants</strong> is a light-hearted animated series about friendship, work, and silly adventures in the underwater city of <span>Bikini Bottom</span>.</p>
+      <p class="citation">“I’m ready!” — SpongeBob</p>
+    </section>
+
+
+    <section class="card" id="tone">
+      <h2>Who is it for?</h2>
+      <div class="info">
+        <ul>
+          <li>Kids and families looking for upbeat comedy.</li>
+          <li>Anyone who enjoys visual gags and memorable quotes.</li>
+          <li>English learners — simple, clear speech and short episodes.</li>
+        </ul>
+      </div>
+
+      <h2>Genres & Themes</h2>
+      <div class="info">
+        <ul>
+          <li>Comedy, slice-of-life, workplace humor.</li>
+          <li>Friendship, optimism, helping others.</li>
+          <li>Absurd situations and clever wordplay.</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <section class="card" id="starter-pack">
+      <h2>Episode Starter Pack</h2>
+      <p>Start with these fan favorites to get the vibe:</p>
+      <div class="info">
+        <ul>
+          <li><strong>Help Wanted</strong> — SpongeBob’s first day at the Krusty Krab.</li>
+          <li><strong>Band Geeks</strong> — the legendary stadium performance.</li>
+          <li><strong>Pizza Delivery</strong> — unexpected road trip with Squidward.</li>
+          <li><strong>Chocolate with Nuts</strong> — salesmen for a day.</li>
+          <li><strong>Rock Bottom</strong> — lost in a strange bus stop.</li>
+        </ul>
+      </div>
+      <a class="btn" href="https://www.youtube.com/results?search_query=spongebob+best+episodes" target="_blank" rel="noopener">Watch clips</a>
+    </section>
+
+    <section class="card" id="quick-places">
+      <h2>Two Key Places</h2>
+      <figure>
+        <img src="../Images/krusty.jpg" alt="Krusty Krab" class="responsive">
+        <figcaption><strong>Krusty Krab</strong> — SpongeBob’s workplace and home of the Krabby Patty.</figcaption>
+      </figure>
+      <figure>
+        <img src="../Images/JellyFish.jpg" alt="Jellyfish Fields" class="responsive">
+        <figcaption><strong>Jellyfish Fields</strong> — perfect meadow for jellyfishing with Patrick.</figcaption>
+      </figure>
+    </section>
+
+   
+    <section class="card" id="glossary">
+      <h2>Mini Glossary</h2>
+      <p><strong>Krabby Patty</strong> — the iconic burger of the Krusty Krab.</p>
+      <p><strong>Jellyfishing</strong> — catching jellyfish for fun (sport/hobby).</p>
+      <p><strong>Goo Lagoon</strong> — Bikini Bottom’s beach area.</p>
+    </section>
+
+    
+    <section class="card" id="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>How long is one episode?</summary>
+        <p>Usually about 11 minutes (two per half-hour slot).</p>
+      </details>
+      <details>
+        <summary>Do I need to watch in order?</summary>
+        <p>No. Most stories are self-contained — perfect for new viewers.</p>
+      </details>
+      <details>
+        <summary>Is it kid-friendly?</summary>
+        <p>Yes — it’s designed for kids and families with gentle humor.</p>
+      </details>
+    </section>
+
+    
+    <section class="card" id="suggest">
+      <h2>Suggest an Episode</h2>
+      <form>
+        <label for="viewer">Your name</label>
+        <input type="text" id="viewer" name="viewer" placeholder="Enter your name">
+
+        <label for="ep">Episode title</label>
+        <input type="text" id="ep" name="ep" placeholder="e.g., Band Geeks">
+
+        <label for="why">Why do you recommend it?</label>
+        <textarea id="why" name="why" rows="4" placeholder="Short reason..."></textarea>
+
+        <input type="submit" value="Send suggestion">
+      </form>
+    </section> 
     </div>
 
     <footer>
-        <div>Designed by Motivation Time members:</div>
+        <div>Designed by Motivation Time members:Danila, Dana, Zhandaulet, Alan</div>
     </footer>
 
 </body>
