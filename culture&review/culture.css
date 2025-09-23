@@ -5,6 +5,7 @@ body {
     font-family: "Luckiest Guy",Arial, sans-serif;
     overflow-x: hidden;
     width: 85%; 
+    background-image: url("https://images.template.net/73802/Free-Spongebob-Floral-Background-Mobile-2.jpg");
 }
 
 .luckiest-guy-regular {
@@ -160,7 +161,7 @@ footer {
 
 h1 {
     text-decoration: underline;
-    color: rgb(0, 193, 210);
+    color: #333;
 }
 
 p::first-letter {
