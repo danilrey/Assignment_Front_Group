@@ -1,47 +1,19 @@
-img {
-    width:400px;
-    height:auto;
-    position: absolute;
-    left: 850px;
-    bottom: 400px;
-    border-radius: 50%;
+hr {
+    border: 1px solid #ea9999;
+    margin: 20px auto 50px auto;
+    width: 61%;
 }
 
 .info {
-    font-size: 28px;
-}
-
-.info ul {
-    font-size: 20px;
-    list-style: none;
-    padding-left: 24px;
-    margin-top: 50px;
-}
-.info ul li {
-    position: relative;
-    margin-top: 10px;
-}
-.info ul li::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    background: #f0e33f;
-    border-radius: 2px;
-    display: inline-block;
-}
-
-hr {
-    width: 64%;
-    margin: 20px 0 70px 0 ;
-    border: 1px solid #ea9999;
+    text-align: center;
+    margin: 0 auto 20px auto;
 }
 
 .facts {
-    margin: 60px 0 60px 60px;
+    margin: 60px auto;
     font-size: 20px;
+    text-align: center;
+    max-width: 60%;
 }
 
 .facts br {
@@ -55,8 +27,73 @@ span {
 }
 
 .citation {
-    margin: 30px 0 30px 40px;
+    margin: 30px auto;
     font-size: 18px;
     font-style: italic;
     text-decoration: underline 2px solid #719870;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 40px 0;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.card {
+    background: #fff8dc;
+    border: 2px solid #f0e68c;
+    border-radius: 12px;
+    padding: 32px 0;
+    text-align: center;
+    color: #333;
+    transition: box-shadow 0.2s, transform 0.2s;
+    width: 30%;
+    margin-bottom: 24px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.32);
+    transform: translateY(-12px);
+}
+
+.card-img {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    margin-bottom: 16px;
+}
+
+.card-btn {
+    background: #f0e68c;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.card-btn:hover {
+    background: #ffe4b5;
+}
+
+.main-content h1 {
+    text-align: center;
+    margin-top: 30px;
 }
