@@ -1,66 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Seaweed+Script&display=swap');
-
-body {
-    margin: 0;
-    font-family: "Luckiest Guy",Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
+.nav-link.active {
+    background-color: #ffe600 !important;
+    color: #000 !important;
 }
 
-.luckiest-guy-regular {
-    font-family: "Luckiest Guy", cursive;
-    font-weight: 400;
-    font-style: normal;
+.nav-link {
+    color: #61b89b !important;
 }
 
-
-header {
-    padding: 6px;
-    width: 100%;
-    background: #f0e68c;
-    margin: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 24px;
+.logo {
+    width: 70px;
+    height: auto;
+    transition: transform 0.2s ease-in-out;
 }
 
-
-header a {
-    padding: 24px;
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    display: block;
-    border-radius: 200px;
-    transition: background 0.2s;
+.logo:hover {
+    transform: rotate(60deg);
 }
 
-header a.active,
-header a:hover {
-    background: #bbdfd1;
+.border-bottom {
+    border-bottom: 1px solid #bbdfd1 !important;
 }
 
 footer {
-    font-size: 14px;
-    margin-top: 50px;
-    padding: 24px;
+    background: #2a3d66;
+    color: #fff;
+    padding: 1rem 0;
     width: 100%;
-    background: #f0e68c;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header img {
-    width: auto;
-    height: 90px;
-    transition: transform 0.2s;
-}
-
-header img:hover {
-    cursor: pointer;
-    transform: rotate(45deg);
 }
