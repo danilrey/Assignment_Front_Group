@@ -2,43 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Places</title>
+    <title>chOcho</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="Merch.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
-    <header>
-        <img src="../assets/sponge_bob.png" alt="Spongebob">
-        <a href="../index.html">Home</a>
-        <a href="../home&history/history.html">History</a>
-        <a href="merch.html">Merch</a>
-        <a href="places.html"   class="active">Places</a>
-        <a href="../description&cartoon/description.html">Description</a>
-        <a href="../description&cartoon/cartoon.html">Cartoon</a>
-        <a href="../culture&review/culture.html">Culture</a>
-        <a href="../culture&review/review.html">Review</a>
-    
+<body class="d-flex flex-column min-vh-100">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-5 border-bottom">
+        <img src="../assets/sponge_bob.png" alt="Spongebob" class="logo mx-5">
+        <ul class="nav nav-pills fs-4">
+            <li class="nav-item">
+                <a href="../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="../home&history/history.html" class="nav-link">History</a>
+            </li>
+            <li class="nav-item">
+                <a href="../merch&places/merch.html" class="nav-link active" aria-current="page">Merch</a>
+            </li>
+            <li class="nav-item">
+                <a href="../merch&places/places.html" class="nav-link">Places</a>
+            </li>
+            <li class="nav-item">
+                <a href="../description&cartoon/description.html" class="nav-link">Description</a>
+            </li>
+            <li class="nav-item">
+                <a href="../description&cartoon/cartoon.html" class="nav-link">Cartoon</a>
+            </li>
+            <li class="nav-item">
+                <a href="../culture&review/culture.html" class="nav-link">Culture</a>
+            </li>
+        </ul>
     </header>
 
-    <div class="main-content">
-        <!-- WRITE YOUR HTML HERE AND STYLE IT BY YOURSELF-->
-         <h1>Places dedicated to the sponge</h1>
-         <h2>Krusty Krab Fan Cafe, Moscow, Old Arbat Street</h2>
-         <h3>This is a fan cafe based on the restaurant of the same name. <br>
-            from the animated series "SpongeBob SquarePants". <br>
-            The cafe was opened in 2016 on the site of the "Crazy Toiet" cafe..<br>
+
+    <div class="main-content container">
+        <h1 class="text-center mb-4">Places dedicated to the sponge</h1>
+        <h2 class="text-center mb-4">Krusty Krab Fan Cafe, Moscow, Old Arbat Street</h2>
+        <h3 class="text-center mb-5">
+            This is a fan cafe based on the restaurant of the same name from the animated series "SpongeBob SquarePants".<br>
+            The cafe was opened in 2016 on the site of the "Crazy Toilet" cafe.<br>
             Unfortunately, the cafe closed for unknown reasons.
-         </h3>
-        <div class="card" style="margin:0 auto; text-align:center;">
-        <img src="Place1.jpg" alt="Restourant" style="display:block; max-width:100%; height:auto; margin:0 auto;">
+        </h3>
+
+        <div class="card mb-4" style="margin:0 auto; text-align:center;">
+            <img src="Place1.jpg" alt="Restaurant" class="card-img-top" style="display:block; max-width:100%; height:auto; margin:0 auto;">
+            <div class="card-body">
+                <p class="card-text">Enjoy the Krusty Krab atmosphere at this unique cafe in Moscow.</p>
+            </div>
         </div>
 
-         
+        <h2 class="text-center mb-4">Another Place to Visit</h2>
+        <h3 class="text-center mb-5">
+            Another iconic location is the SpongeBob SquarePants museum located in London.<br>
+            The museum showcases all of the iconic moments from the show and memorabilia.
+        </h3>
 
-        
+        <div class="card mb-4" style="margin:0 auto; text-align:center;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50yN_QWf6DBcgVgpk_Z3HlMYEFc69KW9Oag&s" alt="Museum" class="card-img-top" style="display:block; max-width:100%; height:auto; margin:0 auto;">
+            <div class="card-body">
+                <p class="card-text">Explore exhibits featuring your favorite characters from the show.</p>
+            </div>
+        </div>
+
     </div>
 
-    <footer>
+    <footer class="mt-auto d-flex flex-wrap justify-content-between py-3 px-4 bg-dark text-white">
         <div>Designed by Motivation Time members:</div>
         <div>
             <div class="footer-name">Zhandaulet Ermekov</div>
@@ -47,6 +76,7 @@
             <div class="footer-name">Dana Bekbosyn</div>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 </html>
