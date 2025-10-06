@@ -5,50 +5,155 @@
     <title>chOcho</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="Merch.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
-    <header>
-        <img src="../assets/sponge_bob.png" alt="Spongebob">
-        <a href="../index.html">Home</a>
-        <a href="../home&history/history.html">History</a>
-        <a href="merch.html"  class="active">Merch</a>
-        <a href="places.html">Places</a>
-        <a href="../description&cartoon/description.html">Description</a>
-        <a href="../description&cartoon/cartoon.html">Cartoon</a>
-        <a href="../culture&review/culture.html">Culture</a>
-        <a href="../culture&review/review.html">Review</a>
-    
+<body class="d-flex flex-column min-vh-100">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-5 border-bottom">
+        <img src="../assets/sponge_bob.png" alt="Spongebob" class="logo mx-5">
+        <ul class="nav nav-pills fs-4">
+            <li class="nav-item">
+                <a href="../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="../home&history/history.html" class="nav-link">History</a>
+            </li>
+            <li class="nav-item">
+                <a href="../merch&places/merch.html" class="nav-link active" aria-current="page">Merch</a>
+            </li>
+            <li class="nav-item">
+                <a href="../merch&places/places.html" class="nav-link">Places</a>
+            </li>
+            <li class="nav-item">
+                <a href="../description&cartoon/description.html" class="nav-link">Description</a>
+            </li>
+            <li class="nav-item">
+                <a href="../description&cartoon/cartoon.html" class="nav-link">Cartoon</a>
+            </li>
+            <li class="nav-item">
+                <a href="../culture&review/culture.html" class="nav-link">Culture</a>
+            </li>
+        </ul>
     </header>
 
-    <div class="main-content">
-        <!-- HTML HERE-->
-    <!-- Merch Page Cont -->
-    <section id="top-banner" class="banner">
-        <h1>SpongeBob Merch</h1>
-        <p class="subtitle">Fan project • 3 featured items</p>
-    </section>
+    <div class="main-content container">
+        <!-- Merch Page Cont -->
+        <section id="top-banner" class="banner">
+            <h1>SpongeBob Merch</h1>
+            <p class="subtitle">Fan project • 3 featured items</p>
+        </section>
 
-    <section class="products">
-        <h2 class="section-title">Featured products</h2>
+        <section class="products">
+            <h2 class="section-title">Featured products</h2>
 
-        <div class="product-grid">
-            <section class="gallery">
-                <figure class="tile"><img src="Spongemerch.jpg" alt=""><figcaption>Footbolka</figcaption></figure>
-                <figure class="tile"><img src="spongenaush.jpg" alt=""><figcaption>Cheholchiki</figcaption></figure>
-                <figure class="tile"><img src="SpongeHudi.jpg" alt=""><figcaption>Hoodie</figcaption></figure>
-                <figure class="tile"><img src="https://www.paramountshop.com/cdn/shop/files/spongebob-squarepants-mustard-unisex-t-shirt-267940.jpg?v=1733833684&width=450" alt=""><figcaption>Footbolka 2</figcaption></figure>
-                <figure class="tile"><img src="https://now.estarland.com/images/products/54/61354/MERCH-Spongebob-Squarepants-Over-the-Knee-Socks-large-image.jpg" alt=""><figcaption>choolki</figcaption></figure>
-                <figure class="tile"><img src="https://images-eu.ssl-images-amazon.com/images/I/71GEMGWKOpL._AC_UL600_SR600,600_.jpg" alt=""><figcaption>Burger 2</figcaption></figure>
-                <figure class="tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6YIO6g0CFxaparY2WZkxALr8eUSfGSEJ9Q&s" alt=""><figcaption>Chernaia footbolka</figcaption></figure>
-                <figure class="tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnqk2uzBZBjZj6AA7RvwOAkKI8YChxFAoxL9Frs9uyJRw3t_vQFY7ZiONbEoupcmltRHM&usqp=CAU" alt=""><figcaption>Seraya</figcaption></figure>
-                <figure class="tile"><img src="https://images.zentail.com/544/3ef0f3246fcb85e0bb065f137020bdb1de34a4da8aa2d1dd69f9daaff2b4de07.jpg" alt=""><figcaption>Chernaya</figcaption></figure>
-                </section>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="Spongemerch.jpg" alt="" class="img-fluid">
+                        <figcaption>Footbolka</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="spongenaush.jpg" alt="" class="img-fluid">
+                        <figcaption>Cheholchiki</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="SpongeHudi.jpg" alt="" class="img-fluid">
+                        <figcaption>Hoodie</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://www.paramountshop.com/cdn/shop/files/spongebob-squarepants-mustard-unisex-t-shirt-267940.jpg?v=1733833684&width=450" alt="" class="img-fluid">
+                        <figcaption>Footbolka 2</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://now.estarland.com/images/products/54/61354/MERCH-Spongebob-Squarepants-Over-the-Knee-Socks-large-image.jpg" alt="" class="img-fluid">
+                        <figcaption>Choolki</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://images-eu.ssl-images-amazon.com/images/I/71GEMGWKOpL._AC_UL600_SR600,600_.jpg" alt="" class="img-fluid">
+                        <figcaption>Burger 2</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6YIO6g0CFxaparY2WZkxALr8eUSfGSEJ9Q&s" alt="" class="img-fluid">
+                        <figcaption>Chernaia footbolka</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnqk2uzBZBjZj6AA7RvwOAkKI8YChxFAoxL9Frs9uyJRw3t_vQFY7ZiONbEoupcmltRHM&usqp=CAU" alt="" class="img-fluid">
+                        <figcaption>Seraya</figcaption>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="tile">
+                        <img src="https://images.zentail.com/544/3ef0f3246fcb85e0bb065f137020bdb1de34a4da8aa2d1dd69f9daaff2b4de07.jpg" alt="" class="img-fluid">
+                        <figcaption>Chernaya</figcaption>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<section id="carousel-section" class="my-5">
+    <h2 class="text-center mb-4">Karusel</h2>
+    
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <!-- Индикаторы -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-    </section>
-    <footer>
+        
+        <!-- Изображения с карусели -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.paramountshop.com/cdn/shop/files/spongebob-squarepants-mustard-unisex-t-shirt-267940.jpg?v=1733833684&width=450" class="d-block w-100" alt="Footbolka">
+            </div>
+            <div class="carousel-item">
+                <img src="https://now.estarland.com/images/products/54/61354/MERCH-Spongebob-Squarepants-Over-the-Knee-Socks-large-image.jpg" class="d-block w-100" alt="Socks">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images-eu.ssl-images-amazon.com/images/I/71GEMGWKOpL._AC_UL600_SR600,600_.jpg" class="d-block w-100" alt="Footbolka 2">
+            </div>
+        </div>
+        
+        <!-- Контролы для навигации -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+
+    
+    <footer class="mt-auto d-flex flex-wrap justify-content-between py-3 px-4">
         <div>Designed by Motivation Time members: <br> Zhandaulet Ermekov Alan Kissamenov Danila Bussygin Dana Bekbosyn</div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 </html>
