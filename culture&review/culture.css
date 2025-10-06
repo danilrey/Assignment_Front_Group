@@ -4,7 +4,6 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 5%;
-    grid-template-columns: repeat(3, 1fr); /* 3 равных колонки */
     align-items: center;
     padding: 10% 30px;
 }
@@ -180,4 +179,41 @@ ul {
 
 footer {
     align-self: flex-end;
+}
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px; 
+  }
+
+  .legacy2 {
+    flex: 1 0 100%;
+    box-sizing: border-box;
+  }
+
+
+
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    font-size: 16px; 
+  }
+
+    .legacy2 {
+    flex: 1 0 40%;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1025px) {
+  body {
+    font-size: 20px;
+  }
+
+    .legacy2 {
+    flex: 1 0 27%;
+    box-sizing: border-box;
+  }
 }
