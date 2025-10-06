@@ -17,6 +17,7 @@
     color: #333;
     transition: box-shadow 0.2s, transform 0.2s;
     width: 30%;
+    box-sizing: border-box;
     margin-bottom: 24px;
 }
 
@@ -60,7 +61,7 @@ body {
     background-color: #f7fafc;  /* мягкий фон))) */
     color: #111;
     font-style: italic;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 /* зголовки */
@@ -210,5 +211,61 @@ img:hover {
   gap: 12px;
 }
 
+
+.carousel-img {
+        width: 200px; /* фиксированная ширина */
+        height: auto; 
+        margin: 0 auto;
+    }
+
+    
+    .carousel-inner {
+        max-width: 250px; 
+        margin: 0 auto; 
+    }
+
 @media (max-width: 800px){ .gallery{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px){ .gallery{ grid-template-columns: 1fr; } }
+
+
+
+
+@media (max-width: 767px) {
+    .card-group {
+        flex-direction: column;
+    }
+    .card {
+        width: 100%; /* Милкий */
+    }
+}
+
+
+
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        font-size: 16px; /* для паштетов */
+    }
+    .card-group {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .card {
+        width: 48%;  
+    }
+    
+
+
+}
+@media (min-width: 1200px) {
+    body {
+        font-size: 18px; /* Большой шрифт для Амбальных */
+    }
+    .card-group {
+        flex-direction: row;
+        justify-content: space-between; 
+    }
+    .card {
+        width: 30%; 
+    }
+}
