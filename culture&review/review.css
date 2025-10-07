@@ -9,7 +9,7 @@
     min-height:100dvh;
     grid-gap:16px;
 }
- 
+
 
 
 .round {
@@ -136,7 +136,7 @@ header {
   border-radius:12px;
 }
 .tile img{
-  width:100%; height:100%;
+  width: 100%; height:100%;
   aspect-ratio: 1 / 1;
   object-fit:cover;
   display:block;
@@ -156,7 +156,7 @@ header {
  
 @media (max-width: 600px) {
   body {
-    font-size: 14px; 
+    font-size: 14px; /* Меньший шрифт для мобильных устройств */
   }
 
   .gallery{
@@ -165,12 +165,12 @@ header {
   gap:12px;
   padding: 10px;                               
 }
-
 }
 
+/* Планшеты (от 601px до 1024px) */
 @media (min-width: 601px) and (max-width: 1024px) {
   body {
-    font-size: 16px; 
+    font-size: 16px; /* Средний шрифт для планшетов */
   }
 
   .gallery{
@@ -179,19 +179,18 @@ header {
   gap:12px;
   padding: 10px;                               
 }
-
 }
 
+/* Десктопы (от 1025px и выше) */
 @media (min-width: 1025px) {
   body {
-    font-size: 20px;
+    font-size: 20px; /* Больший шрифт для десктопов */
   }
 
-.gallery{
+  .gallery{
   display:grid;                              
   grid-template-columns: repeat(3, 1fr);     
   gap:12px;
   padding: 10px;                               
 }
-
 }
