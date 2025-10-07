@@ -4,6 +4,7 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 5%;
+    grid-template-columns: repeat(3, 1fr); /* 3 равных колонки */
     align-items: center;
     padding: 10% 30px;
 }
@@ -121,12 +122,13 @@ p::first-letter {
     border-radius: 15%;
 }
 
+
 .legacy2 iframe {
     width: 80%;
     border-radius: 15%;
 }
 
-button {
+.legacy2 button {
     width: 50%;
     height: 10%;
     border-radius: 20px;
@@ -137,14 +139,14 @@ button {
     padding: 8px 12px;
 }
 
-button:hover {
+.legacy2 button:hover {
     background-color: #bbdfd1;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transform: translateY(-5px);
     transform: scale(1.05);
 }
 
-button a {
+.legacy2 button a {
     text-decoration: none;
     color: aliceblue;
     transition: background 0.2s;
@@ -169,7 +171,7 @@ button a {
     transform: scale(1.60);
 }
 
-button:hover a {
+.legacy2 button:hover a {
     color: #719870;
 }
 
@@ -181,39 +183,240 @@ footer {
     align-self: flex-end;
 }
 
+.tile{
+    display: flex;
+    flex-direction: column;
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 1 / 1;  
+}
+.tile img{
+  width:70%; height:70%;
+  aspect-ratio: 1 / 1;
+  object-fit:cover;
+  display:block;
+  border-radius: 8px;
+}
+.tile figcaption{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; background:rgba(0,0,0,.45);
+  opacity:0; transition:opacity .2s ease;
+  text-align:center; padding:8px;
+}
+.tile:hover figcaption{ opacity:1; }
 
+.carousel {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+.carousel img {
+    width:70%; height:70%;
+    aspect-ratio: 1 / 1;
+    object-fit:cover;
+    display:block;
+    border-radius: 8px;
+    }
+
+    
+    .carousel-inner {
+        max-width: 250px; 
+        margin: 25px auto; 
+    }
+
+.carousel-indicators {
+    background-color: #333;
+    margin-bottom: 10px;
+    margin-top: 10%;
+    border-radius: 5px;
+}
+
+    /* Стили для кнопок управления каруселью */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  transform: translateY(-10%); /* Центрируем по вертикали */
+  background-color: rgba(0, 0, 0);
+  border: none;
+  padding: 10px;
+  
+}
+
+.carousel-control-prev {
+  left: 10px; /* Отступ от левого края */
+  background-color: #333;
+}
+
+.carousel-control-next {
+  right: 10px; /* Отступ от правого края */
+  background-color: #333;
+}
+
+/* Стили для иконок внутри кнопок */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(0, 0, 0); 
+  margin-top: 50%;
+}
+
+
+/* Hover эффекты */
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Темнее при наведении */
+  cursor: pointer;
+}
+
+#carouselExample {
+    margin-bottom: 30px;
+}
+
+.carousel-indicators button {
+    background-color: #333;
+    color: #333;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 27%;
+    height: 500px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 25px;
+    background-color: #bbdfd1;
+    padding: 5px;
+    margin-top: 20px;
+}
+
+.card:hover {
+    background-color: #bbdfd1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 80%;
+    border-radius: 15%;
+}
+
+.card img:hover {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+    transform: scale(1.05);
+}
+
+
+
+.cartholder {
+    grid-template-columns: repeat(3, 1fr); /* 3 равных колонки */
+    align-items: center;
+    padding: 10% 30px;
+}
+/* Для мобильных устройств увеличиваем размеры стрелок */
+@media (max-width: 768px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    padding: 12px; /* Увеличиваем кнопки на мобильных */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 40px;
+    height: 40px; /* Увеличиваем иконки на мобильных */
+  }
+}
+
+
+/* Адаптивные отступы для мобильных */
+@media (max-width: 768px) {
+  .container .col-lg-6,
+  .container .col-lg-4 {
+    margin-bottom: 15px; /* меньше отступов для мобильных */
+  }
+}
+
+/* Стили для последней колонки в ряду, чтобы не было лишнего правого отступа */
+.container .col-lg-4:nth-child(3n) {
+  margin-right: 0; /* убираем отступ справа у последнего элемента в строке */
+}
+
+
+/* Адаптивные отступы для мобильных */
+@media (max-width: 768px) {
+  .two-columns .col-lg-6,
+  .three-columns .col-lg-4 {
+    margin-bottom: 15px; /* меньше отступов для мобильных */
+  }
+}
+
+/* Стили для последней колонки в ряду, чтобы не было лишнего правого отступа */
+.three-columns .col-lg-4:nth-child(3n) {
+  margin-right: 0; /* убираем отступ справа у последнего элемента в строке */
+}
+
+
+/* Адаптивные отступы для мобильных */
+@media (max-width: 768px) {
+  .two-columns .col-lg-6,
+  .three-columns .col-lg-4 {
+    margin-bottom: 15px;
+  }
+}
+
+/* Адаптивные отступы для мобильных */
+@media (max-width: 768px) {
+  .two-columns .col-lg-6,
+  .three-columns .col-lg-4 {
+    margin-bottom: 15px;
+  }
+}
+
+
+/* Мобильные устройства (до 600px) */
 @media (max-width: 600px) {
   body {
-    font-size: 14px; 
+    font-size: 14px; /* Меньший шрифт для мобильных устройств */
   }
 
   .legacy2 {
-    flex: 1 0 100%;
-    box-sizing: border-box;
+    flex: 1 0 100%; 
+  box-sizing: border-box;
   }
-
-
-
 }
 
+/* Планшеты (от 601px до 1024px) */
 @media (min-width: 601px) and (max-width: 1024px) {
   body {
-    font-size: 16px; 
+    font-size: 16px; /* Средний шрифт для планшетов */
   }
 
-    .legacy2 {
-    flex: 1 0 40%;
-    box-sizing: border-box;
+  .legacy2 {
+    flex: 1 0 40%; 
+  box-sizing: border-box;
   }
 }
 
+/* Десктопы (от 1025px и выше) */
 @media (min-width: 1025px) {
   body {
-    font-size: 20px;
+    font-size: 20px; /* Больший шрифт для десктопов */
   }
 
-    .legacy2 {
-    flex: 1 0 27%;
-    box-sizing: border-box;
+  .legacy2 {
+    flex: 1 0 27%; 
+  box-sizing: border-box;
   }
 }
