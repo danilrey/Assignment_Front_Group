@@ -4,6 +4,12 @@ hr {
     width: 61%;
 }
 
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .info {
     text-align: center;
     margin: 0 auto 20px auto;
@@ -96,4 +102,132 @@ span {
 .main-content h1 {
     text-align: center;
     margin-top: 30px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr 3fr 1fr;
+    justify-items: center;
+    background-color: #bbdfd1;
+    width: 50vh;
+    height: 50vh;
+    border-radius: 25px;
+    margin: 50px 0 200px 0;
+}
+
+.form-title {
+    margin-top: 28px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.email-form input {
+    width: 200px;
+    height: 30px;
+}
+
+.email-form input.error,
+.feedback-form textarea.error{
+    border: 2px solid red !important;
+    background-color: #ffeaea;
+}
+
+.email-form input:focus,
+.feedback-form textarea:focus{
+    outline: none;
+    border: 2px solid #719870;
+    background-color: #e6f5ee;
+}
+
+.feedback-form textarea {
+    width: 200px;
+    height: 80px;
+    resize: none;
+}
+
+.submit-btn,
+.pop-up-btn-allow,
+.pop-up-btn-deny {
+    width: 100px;
+    height: 30px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 60px;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover,
+.pop-up-btn-allow:hover,
+.pop-up-btn-deny:hover {
+    background-color: #555;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pop-up {
+    display: none;
+}
+
+.pop-up.visible{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr 1fr;
+    justify-items: center;
+    align-items: center;
+    position: fixed;
+    width: 360px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #bbdfd1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.pop-up-close {
+    color: #ea9999;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+    background-color: moccasin;
+    border-radius: 50%;
+    padding: 6px 6px 0 6px;
+}
+
+.pop-up-close:hover {
+    background-color: #ffeaea;
+}
+
+.pop-up-btn-deny {
+    margin-left: 20px;
+}
+
+.pop-up-btn-allow {
+    margin-right: 20px;
+}
+
+.pop-up-main {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pop-up-text {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
 }
