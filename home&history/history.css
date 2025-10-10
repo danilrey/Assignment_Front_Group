@@ -11,11 +11,22 @@ span {
 }
 
 .citation {
-    margin: 30px 0 30px 200px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0 0 0 200px;
     font-size: 20px;
     font-style: italic;
     text-decoration: underline 2px solid #719870;
+    transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s;
 }
+
+.citation.visible {
+    opacity: 1;
+    max-height: 100%;
+    margin: 30px 0 30px 200px;
+}
+
 
 h1 {
     font-size: 36px;
@@ -88,3 +99,9 @@ hr {
     opacity: 1;
 }
 
+.date {
+    font-size: 24px;
+    color: #5a7a5a;
+    margin: 150px 0 200px 0;
+    text-align: center;
+}
