@@ -71,24 +71,45 @@
         </div>
         <div class="input_box">
             <form>
-                <h2>Share your opinion on Spongebob TV Show</h2>
-            
+                <h2 class="form-title">Share your opinion on Spongebob TV Show</h2>
+                
                 <div class="input_inbox">
-                    <label for="name" class="required">Name</label>
-                    <input class="input_bar" type="text" id="name" name="name" placeholder="Enter your name" required>
+                    <label for="fullName" class="required">
+                    <input class="fullName" type="name" name="fullName" placeholder="Enter your name" autocomplete="name" required>
+                    </label>
                 </div>
-                <div class="input_inbox">
-                    <label for="email" class="required">Email</label>
-                    <input class="input_bar" type="email" id="email" name="email" placeholder="Enter your email" required>
+                
+                <div class="email-form">
+                    <label for="email" class="required">
+                    <input type="email" name="email" autocomplete="email" placeholder="Enter your email" required>
+                    </label>
                 </div>
+                
                 <div class="input_inbox">
-                    <label for="Review">Review</label>
-                    <textarea class="input_bar" id="Review" name="Review" placeholder="Write your opinion"></textarea>
+                    <label for="password">
+                    <input class="password" name="password" type="password" autocomplete="new-password" placeholder="Enter your password"></input>
+                    </label>
+                </div>
+                
+                <div class="feedback-form">
+                    <label for="Review">
+                    <textarea name="Review" placeholder="Write your opinion"></textarea>
+                    </label>
                 </div>
                 <div class="button">
-                    <button type="submit" class="button">Send</button>
+                    <button class="submit-btn" type="submit" disabled>Send</button>
                 </div>
             </form>
+
+            <div class="pop-up">
+            <div class="pop-up-main">Thanks to using our site!</div>
+            <div class="pop-up-close">X</div>
+            <div class="pop-up-text"> Allow us to send you mail</div>
+            <div>
+                <button class="pop-up-btn-allow">OK</button>
+                <button class="pop-up-btn-deny">No, thanks</button>
+            </div>
+        </div>
         </div>
     
 
@@ -113,6 +134,8 @@
         </div>
     </footer>
 </main>
+
+<script src="review.js"></script>
 
 </body>
 </html>
