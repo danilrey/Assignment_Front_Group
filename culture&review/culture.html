@@ -75,6 +75,54 @@
         </div>
         
 
+      <!-- Добавь data-accordion="single", если нужен режим «только один открыт» -->
+      <div class="accordion" id="faq" data-accordion="multiple">
+        <!-- Item 1 -->
+        <div class="acc-item">
+          <button class="acc-trigger" id="acc-1" aria-controls="panel-1" aria-expanded="false">
+            <p> In what year SpongeBob came out? </p>
+            <svg class="acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-panel" id="panel-1" role="region" aria-labelledby="acc-1" hidden>
+            <div class="panel-inner">
+              <p> SpongeBob SquarePants first aired on May 1, 1999, as a sneak peek after the 1999 Kids' Choice Awards. </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="acc-item">
+          <button class="acc-trigger" id="acc-2" aria-controls="panel-2" aria-expanded="false">
+            <p> What is the average length of Sponge Bob episodes? </p>
+            <svg class="acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-panel" id="panel-2" role="region" aria-labelledby="acc-2" hidden>
+            <div class="panel-inner">
+             <p>  The average SpongeBob episode is about 22 minutes long. </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="acc-item">
+          <button class="acc-trigger" id="acc-3" aria-controls="panel-3" aria-expanded="false">
+            <p> What gender is Sponge Bob? </p>
+            <svg class="acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-panel" id="panel-3" role="region" aria-labelledby="acc-3" hidden>
+            <div class="panel-inner">
+              <p> SpongeBob SquarePants is a male character, who uses "he/him" pronouns. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <footer>
@@ -84,6 +132,6 @@
         <div>Danila Bussygin</div>
         <div>Dana Bekbosyn</div>
     </footer>
-
+    <script src="culture.js"></script>
 </body>
 </html>
