@@ -260,5 +260,12 @@ footer {
     color: #2079ff;
 }
 
+.date {
+    font-size: 20px;
+    color: #00effb;
+    margin: 150px 0 200px 0;
+    text-align: center;
+}
+
 a{color:#2079ff}
 code{background:#101522; padding:2px 6px; border-radius:6px; border:1px solid #222d46}
