@@ -81,15 +81,15 @@ popUpDeny.addEventListener('click', () => {
     }, 2000);
 });
 
-//changing background color
-const image = document.querySelector('header img');
-const header = document.querySelector('header');
-const colors = ['#add8e6', '#90ee90', '#ffb6c1', '#f0e68c', '#ffa07a', '#e6e6fa'];
-let currentIndex = 0;
 
-image.addEventListener('click', () => {
-    const randomColor = colors[currentIndex];
-    currentIndex = (currentIndex + 1) % colors.length;
-    header.style.backgroundColor = randomColor;
-})
-
+// Change background color
+    const bgBtn = document.querySelector('.change-bg-btn');
+    const bodyEl = document.body;
+    const colors = ['#505050ff', '#ffffffff', '#86ff7eff', '#f0e68c', '#0044ffff'];
+    let currentIndex = 0;
+    if(bgBtn){
+        bgBtn.addEventListener('click', () => {
+            bodyEl.style.backgroundColor = colors[currentIndex];
+            currentIndex = (currentIndex + 1) % colors.length;
+        });
+    }
