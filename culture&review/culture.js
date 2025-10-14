@@ -64,3 +64,18 @@ function setupAccordion(root){
 
 // Инициализация
 document.querySelectorAll('.accordion').forEach(setupAccordion);
+
+
+//current date
+const date = document.querySelector('.date');
+function updateTime() {
+    const currentDate = new Date();
+    const options = {
+        weekday: 'long', year: 'numeric', month: 'long',
+        day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+    };
+    date.textContent = currentDate.toLocaleDateString('en-US', options);
+}
+
+updateTime();
+setInterval(updateTime, 1000);
