@@ -287,3 +287,30 @@ form {
     color: #333;
     text-align: center;
 }
+
+.date {
+    font-size: 20px;
+    color: #00effb;
+    margin: 150px 0 200px 0;
+    text-align: center;
+}
+
+.change-bg-btn {
+    width: 70%;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border-radius: 10px;
+    border: 1px #5e5e5e dashed;
+    background-color: #bbdfd1;
+    color: #333;
+}
+
+.change-bg-btn:hover {
+    background-color: #86daba;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+    transform: scale(1.05);
+}
