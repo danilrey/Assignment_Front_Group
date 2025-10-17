@@ -1,10 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Seaweed+Script&display=swap');
 
+* {
+    transition: background 0.3s, color 0.3s;
+}
+
+
 body {
     margin: 0;
     font-family: "Luckiest Guy",Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    background: #fff;
+    color: #222;
+}
+
+body.night {
+    background: #403f3f;
+    color: #f1f1f1;
 }
 
 .luckiest-guy-regular {
@@ -17,7 +29,6 @@ body {
 header {
     padding: 6px;
     width: 100%;
-    background: #f0e68c;
     margin: 0;
     box-sizing: border-box;
     display: flex;
@@ -25,7 +36,6 @@ header {
     align-items: center;
     gap: 24px;
 }
-
 
 header a {
     padding: 24px;
@@ -37,9 +47,18 @@ header a {
     transition: background 0.2s;
 }
 
+body.night header a {
+    color: #f1f1f1;
+}
+
 header a.active,
 header a:hover {
     background: #bbdfd1;
+}
+
+body.night header a.active,
+body.night header a:hover {
+    background: #8fafa5;
 }
 
 footer {
@@ -54,9 +73,14 @@ footer {
     align-items: center;
 }
 
+body.night footer {
+    background: #bfb66a;
+    color: #D3D3D3;
+}
+
 header img {
     width: auto;
-    height: 90px;
+    height: 86px;
     transition: transform 0.2s;
 }
 
@@ -64,3 +88,12 @@ header img:hover {
     cursor: pointer;
     transform: rotate(45deg);
 }
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+

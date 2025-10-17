@@ -4,6 +4,10 @@ hr {
     width: 61%;
 }
 
+body.night hr {
+    border: 1px solid #854a51;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -62,8 +66,20 @@ span {
     margin-bottom: 24px;
 }
 
+body.night .card {
+    background: #bfb66a;
+    border: 2px solid #a69d51;
+    color: #f1f1f1;
+}
+
+
 .card:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.32);
+    transform: translateY(-12px);
+}
+
+body.night .card:hover {
+    box-shadow: 0 4px 16px rgba(255,255,255,0.18);
     transform: translateY(-12px);
 }
 
@@ -116,11 +132,19 @@ form {
     margin: 50px 0 200px 0;
 }
 
+body.night form {
+    background-color: #8fafa5;
+}
+
 .form-title {
     margin-top: 28px;
     font-size: 24px;
     font-weight: bold;
     color: #333;
+}
+
+body.night .form-title {
+    color: #f1f1f1;
 }
 
 .email-form input {
@@ -153,7 +177,7 @@ form {
     width: 100px;
     height: 30px;
     background-color: #333;
-    color: #fff;
+    color: #f1f1f1;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -194,6 +218,10 @@ form {
     z-index: 1000;
 }
 
+body.night .pop-up.visible {
+    background-color: #8fafa5;
+}
+
 .pop-up-close {
     color: #ea9999;
     position: absolute;
@@ -226,8 +254,16 @@ form {
     font-weight: bold;
 }
 
+body.night .pop-up-main {
+    color: #f1f1f1;
+}
+
 .pop-up-text {
     font-size: 18px;
     color: #333;
     text-align: center;
+}
+
+body.night .pop-up-text {
+    color: #f1f1f1;
 }
