@@ -1,5 +1,3 @@
-
-
 //changing background color
 const image = document.querySelector('header img');
 const header = document.querySelector('header');

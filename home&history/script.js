@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); // Prevents page reload
         });
     }
+    //night toggler
+    const toggleBtn = document.getElementById('theme-toggle');
+    const logoImg = document.querySelector('header img');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('night');
+        const isNight = document.body.classList.contains('night');
+        toggleBtn.textContent = isNight ? '☀️' : '🌙';
+        logoImg.src = isNight ? 'assets/gary.png' : 'assets/sponge_bob.png';
+        header.style.backgroundColor = isNight ? colorsNight[currentIndex] : colors[currentIndex];
+    });
+
 });
 
 
@@ -82,16 +93,6 @@ image.addEventListener('click', () => {
     }
 })
 
-//night toggler
-const toggleBtn = document.getElementById('theme-toggle');
-const logoImg = document.querySelector('header img');
-toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('night');
-    const isNight = document.body.classList.contains('night');
-    toggleBtn.textContent = isNight ? '☀️' : '🌙';
-    logoImg.src = isNight ? 'assets/gary.png' : 'assets/sponge_bob.png';
-    header.style.backgroundColor = isNight ? colorsNight[currentIndex] : colors[currentIndex];
-});
 
 //audio function
 async function toggleAudio() {
