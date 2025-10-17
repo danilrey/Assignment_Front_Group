@@ -89,7 +89,7 @@ toggleBtn.addEventListener('click', () => {
     document.body.classList.toggle('night');
     const isNight = document.body.classList.contains('night');
     toggleBtn.textContent = isNight ? '☀️' : '🌙';
-    logoImg.src = isNight ? '../assets/gary.png' : '../assets/sponge_bob.png';
+    logoImg.src = isNight ? 'assets/gary.png' : 'assets/sponge_bob.png';
     header.style.backgroundColor = isNight ? colorsNight[currentIndex] : colors[currentIndex];
 });
 
