@@ -17,6 +17,7 @@
         <a href="../description&cartoon/cartoon.html">Cartoon</a>
         <a href="../culture&review/culture.html">Culture</a>
         <a href="../culture&review/review.html">Review</a>
+        <button id="theme-toggle" aria-label="Toggle night mode">🌙</button>
     
     </header>
 
@@ -45,6 +46,29 @@
                 </section>
         </div>
     </section>
+
+
+    <section id="rate-section" class="container my-5">
+  <h2 class="section-title">Rate this merch</h2>
+
+  <div class="stars" aria-label="Rating">
+    <span class="star" data-value="1" aria-label="1 star">★</span>
+    <span class="star" data-value="2" aria-label="2 stars">★</span>
+    <span class="star" data-value="3" aria-label="3 stars">★</span>
+    <span class="star" data-value="4" aria-label="4 stars">★</span>
+    <span class="star" data-value="5" aria-label="5 stars">★</span>
+  </div>
+
+  <p class="rating-output">No rating yet</p>
+
+  <button id="change-msg-btn" class="card-btn" type="button">
+    Change message
+  </button>
+  <p id="dynamic-msg">Click the button to change this text</p>
+</section>
+
+
+
         <h1>SpongeBob Merch Interaction</h1>
             <p class="subtitle">FORM</p>
         </section>
@@ -75,7 +99,12 @@
                     <button class="pop-up-btn-deny">No, thanks</button>
                 </div>
             </div>
+        <button type="button" id="resetFeedback" class="btn-like">Reset</button>
+        <span id="resetStatus" style="margin-left:8px;"></span>
         </section>
+
+
+
 
     <section id="faq" class="container my-5">
         <h2>Frequently Asked Questions</h2>
@@ -101,6 +130,24 @@
             </div>
         </div>
     </section>
+
+<!-- ===== Advanced JS Demo ===== -->
+<section id="js-advanced" class="advanced-wrap">
+  <h2>Advanced JS Demo</h2>
+
+  <div class="controls-row">
+    <button id="loadProductsBtn" class="btn-like">Load dynamic products</button>
+    <label class="price-filter">
+      <span>Max price:</span>
+      <input type="number" id="maxPrice" value="80" min="1" step="1" />
+      <button id="applyFilter" class="btn-like">Apply filter</button>
+    </label>
+    <button id="playSoundBtn" class="btn-like">Play sound</button>
+  </div>
+
+  <div id="dynamicList" class="dyn-grid"></div>
+</section>
+
 
 <section id="subscribe-section" class="container my-5">
     <button class="open-popup-btn">Subscribe</button>
