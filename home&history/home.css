@@ -42,6 +42,7 @@ span {
     font-style: italic;
     text-decoration: underline 2px solid #719870;
     text-align: center;
+    transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s;
 }
 
 .card-container {
@@ -196,11 +197,7 @@ body.night .form-title {
     cursor: not-allowed;
 }
 
-.pop-up {
-    display: none;
-}
-
-.pop-up.visible{
+.pop-up{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.5fr 0.5fr 1fr;
@@ -267,3 +264,15 @@ body.night .pop-up-main {
 body.night .pop-up-text {
     color: #f1f1f1;
 }
+.submit-btn .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

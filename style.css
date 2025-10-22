@@ -97,3 +97,21 @@ header img:hover {
     margin-left: 1rem;
 }
 
+.progress-wrap{
+    position:fixed;
+    left:0;
+    top:0;
+    right:0;
+    height:8px;
+    pointer-events:none;
+    background:linear-gradient(90deg, rgba(0,0,0,0.04), rgba(255,255,255,0.02));
+    display:block;
+}
+.progress-bar{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#add8e6,#ffb6c1 40%,#ffa07a 100%);
+    transition:width 150ms linear;
+    will-change:width;
+    border-radius:999px;
+}

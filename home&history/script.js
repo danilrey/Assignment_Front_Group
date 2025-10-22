@@ -1,119 +1,124 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents page reload
-        });
-    }
-    //night toggler
-    const toggleBtn = document.getElementById('theme-toggle');
-    const logoImg = document.querySelector('header img');
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('night');
-        const isNight = document.body.classList.contains('night');
-        toggleBtn.textContent = isNight ? '☀️' : '🌙';
-        logoImg.src = isNight ? 'assets/gary.png' : 'assets/sponge_bob.png';
-        header.style.backgroundColor = isNight ? colorsNight[currentIndex] : colors[currentIndex];
-    });
-
-});
-
-
-//form validation
-const emailInput = document.querySelector('.email-form input');
-const submitBtn = document.querySelector('.submit-btn');
-const textarea = document.querySelector('.feedback-form textarea');
-
-emailInput.addEventListener('input', () => {
-    const email = emailInput.value;
-    const isValid = validateEmail(email);
-    emailInput.classList.toggle('error', !isValid);
-    if (submitBtn) submitBtn.disabled = !isValid;
-});
-
-textarea.addEventListener('input', () => {
-    const feedback = textarea.value.trim();
-    const isValid = feedback.length >= 5;
-    textarea.classList.toggle('error', !isValid);
-    if (submitBtn) submitBtn.disabled = !isValid;
-})
-
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-//pop-up window
-const closeBtn = document.querySelector('.pop-up-close');
-const popUpAllow = document.querySelector('.pop-up-btn-allow');
-const popUpDeny = document.querySelector('.pop-up-btn-deny');
-const popUp = document.querySelector('.pop-up');
-
-function showPopUp() {
-    popUp.classList.add('visible');
-}
-
-function hidePopUp() {
-    popUp.classList.remove('visible');
-}
-
-submitBtn.addEventListener('click', showPopUp);
-closeBtn.addEventListener('click', hidePopUp);
-
-popUpAllow.addEventListener('click', () => {
-    popUpAllow.textContent = "Thanks!";
-    setTimeout( () => {
-        hidePopUp();
-        popUpAllow.textContent = "OK";
-    }, 2000);
-});
-
-popUpDeny.addEventListener('click', () => {
-    popUpDeny.textContent = "Sorry!";
-    setTimeout( () => {
-        hidePopUp();
-        popUpDeny.textContent = "No, thanks";
-    }, 2000);
-});
-
-//changing background color
-const image = document.querySelector('header img');
-const header = document.querySelector('header');
 const colors = ['#f0e68c', '#add8e6', '#90ee90', '#ffb6c1', '#ffa07a', '#c8c8ff'];
 const colorsNight = ['#bfb66a', '#7cadbc', '#61b861', '#c88189', '#c57757', '#8a8abf'];
 let currentIndex = 0;
-header.style.backgroundColor = colors[0];
 
-image.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % colors.length;
-    if (document.body.classList.contains('night')) {
-        header.style.backgroundColor = colorsNight[currentIndex];
-    } else {
-        header.style.backgroundColor = colors[currentIndex];
-    }
-})
+$(document).ready(function() {
+    console.log("Page is ready")
+
+    //prevent form from submitting
+    $("form").submit(function(event) {
+        event.preventDefault();
+    })
+
+    //night toggler
+    const logoImg = $("header img")
+    const body = $("body")
+    $("#theme-toggle").click(function () {
+        const isNight = body.hasClass("night")
+        applyTheme(!isNight)
+    })
+
+    //form validation
+    const emailInput = $("input[type='email']")
+    const submitBtn = $(".submit-btn")
+    const textarea = $("textarea")
+
+    emailInput.on("input", function() {
+        const email = emailInput.val()
+        const isValid = validateEmail(email)
+        emailInput.toggleClass("error", !isValid)
+        if (submitBtn) submitBtn.prop("disabled", !isValid)
+    })
+
+    textarea.on( "input", function() {
+        const feedback = textarea.val().trim()
+        const isValid = feedback.length >= 5;
+        textarea.toggleClass("error", !isValid)
+        if (submitBtn) submitBtn.prop("disabled", !isValid)
+    })
+
+    //pop-up window
+    const closeBtn = $(".pop-up-close")
+    const popUpAllow = $(".pop-up-btn-allow")
+    const popUpDeny = $(".pop-up-btn-deny")
+    const popUp = $(".pop-up")
+    popUp.hide()
+
+    //submit spinner
+    submitBtn.click(function () {
+        const $btn = $(this);
+        if ($btn.prop("disabled")) return;
+
+        const originalHtml = $btn.html();
+
+        $btn
+            .prop("disabled", true)
+            .attr("aria-busy", "true")
+            .addClass("loading")
+            .html('<span class="spinner" aria-hidden="true"></span> Please wait\u2026');
+
+        setTimeout(function () {
+            $btn
+                .prop("disabled", false)
+                .removeAttr("aria-busy")
+                .removeClass("loading")
+                .html(originalHtml);
+
+            popUp.show();
+        }, 1500);
+    });
 
 
-//audio function
-async function toggleAudio() {
-    const audio =document.querySelector('audio');
-    try {
-        if (audio.paused) {await audio.play();}
-        else {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-    } catch (error) {
-        console.error('Error playing audio:', error);
-    }
-}
+    closeBtn.click(function() {
+        popUp.hide()
+    })
 
-//keyboard navigation
-document.addEventListener('keydown', (e) => {
-    const ae = document.activeElement;
-    if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT' || ae.isContentEditable)) return;
+    popUpAllow.click(function() {
+        popUpAllow.text("Thanks!")
+        setTimeout(function() {
+            popUp.hide()
+            popUpAllow.text("OK")
+        }, 2000)
+    })
+
+    popUpDeny.click(function() {
+        popUpDeny.text("Sorry!")
+        setTimeout(function() {
+            popUp.hide()
+            popUpDeny.text("No, thanks")
+        }, 2000)
+    })
+
+    //changing background color
+    $('header').css('background-color', colors[0])
+    logoImg.click(function() {
+        currentIndex = (currentIndex + 1) % colors.length;
+        const isNight = body.hasClass("night")
+        applyTheme(isNight)
+    })
+
+    //hide text or read more
+    $('span').each(function() {
+        $(this).click(function() {
+            $('.citation').fadeToggle(600)
+        })
+    })
+
+    //subscriber counter
+    subscribersCounter();
+
+
+    //scroll progress bar
+    $(window).scroll(function() {
+        const scroll = $(window).scrollTop()
+        const maxScroll = $(document).height() - $(window).height()
+        const progress = scroll / maxScroll
+        $('.progress-bar').css('width', progress * 100 + '%')
+    })
+
+    //keyboard handler
+}).keydown(function(e) {
     if (e.ctrlKey || e.altKey || e.metaKey || e.repeat) return;
-
     if (e.key === 'p') {
         e.preventDefault();
         toggleAudio();
@@ -132,11 +137,51 @@ document.addEventListener('keydown', (e) => {
         case '8': index = 7; break;
         default: return;
     }
-
-    const links = Array.from(document.querySelectorAll('header a'));
+    const links = $('header a')
     if (index < 0 || index >= links.length) return;
+    links.each(function(i, a) {
+        a.classList.toggle('active', i === index)
+    })
+    const domLink = links.get(index)
+    if (domLink && typeof domLink.focus === 'function') domLink.focus()
+})
 
-    links.forEach((a, i) => a.classList.toggle('active', i === index));
-    links[index].focus();
-});
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+async function toggleAudio() {
+    const audio = $('audio').get(0)
+    try {
+        if (audio.paused) {await audio.play();}
+        else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    } catch (e) {console.log('Error playing audio:', e)}
+}
+
+function applyTheme(isNight) {
+    $('body').toggleClass('night', isNight)
+    $('#theme-toggle').text(isNight ? '☀️' : '🌙')
+    $('header img').attr('src', isNight ? '../assets/gary.png' : '../assets/sponge_bob.png')
+    $('header').css('background-color', isNight ? colorsNight[currentIndex] : colors[currentIndex])
+}
+
+function subscribersCounter() {
+    const $el = $('.subscribers');
+    if (!$el.length) return;
+
+    let count = 1;
+
+    function update() {
+        count += Math.random() * 0.02;
+        $el.text("Subscribers counter: " + Math.floor(count));
+        requestAnimationFrame(update);
+    }
+
+    update();
+}
+
 
