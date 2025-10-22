@@ -54,7 +54,7 @@ $(document).ready(function() {
         $btn
             .prop("disabled", true)
             .attr("aria-busy", "true")
-            .html('<span class="spinner" aria-hidden="true"></span> Please wait\u2026');
+            .html('<span class="spinner" aria-hidden="true"></span> Wait\u2026');
 
         setTimeout(function () {
             $btn
