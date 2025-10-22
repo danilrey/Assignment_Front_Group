@@ -54,14 +54,12 @@ $(document).ready(function() {
         $btn
             .prop("disabled", true)
             .attr("aria-busy", "true")
-            .addClass("loading")
             .html('<span class="spinner" aria-hidden="true"></span> Please wait\u2026');
 
         setTimeout(function () {
             $btn
                 .prop("disabled", false)
                 .removeAttr("aria-busy")
-                .removeClass("loading")
                 .html(originalHtml);
 
             popUp.show();
