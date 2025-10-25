@@ -592,3 +592,23 @@ header a:focus{
   70%{ transform: scale(1.04); }
   100%{ transform: scale(1); }
 }
+
+
+
+
+#autocomplete-list {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    max-width: 300px;
+}
+
+#autocomplete-list li {
+    padding: 6px 10px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+#autocomplete-list li:hover {
+    background-color: #ccc;
+}
