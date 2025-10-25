@@ -394,13 +394,57 @@ if (soundBtn) {
   });
 }
 
-/**
- * 5) Extra: пример работы с массивами (reduce) — подсчёт средней цены
- * (можешь вывести куда-то, если понадобится)
- */
 function avgFinalPrice(list){
   if(!list.length) return 0;
   const sum = list.reduce((acc, p) => acc + p.finalPrice(), 0);
   return +(sum / list.length).toFixed(2);
 }
-// console.log('Average final price:', avgFinalPrice(products));
+
+
+$(document).ready(function() {
+    console.log("jQuery is ready!");
+
+    const products = [
+        { name: "Footbolka", img: "Spongemerch.jpg" },
+        { name: "Cheholchiki", img: "spongenaush.jpg" },
+        { name: "Hoodie", img: "SpongeHudi.jpg" },
+        { name: "Footbolka 2", img: "https://www.paramountshop.com/cdn/shop/files/spongebob-squarepants-mustard-unisex-t-shirt-267940.jpg?v=1733833684&width=450" },
+        { name: "Fkusnie SOCKS", img: "https://now.estarland.com/images/products/54/61354/MERCH-Spongebob-Squarepants-Over-the-Knee-Socks-large-image.jpg" },
+        { name: "Burger 2", img: "https://images-eu.ssl-images-amazon.com/images/I/71GEMGWKOpL._AC_UL600_SR600,600_.jpg" },
+        { name: "Chernaia footbolka", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6YIO6g0CFxaparY2WZkxALr8eUSfGSEJ9Q&s" },
+        { name: "Seraya Footbolochka", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnqk2uzBZBjZj6AA7RvwOAkKI8YChxFAoxL9Frs9uyJRw3t_vQFY7ZiONbEoupcmltRHM&usqp=CAU" },
+        { name: "Chernaya Futbolnaya", img: "https://images.zentail.com/544/3ef0f3246fcb85e0bb065f137020bdb1de34a4da8aa2d1dd69f9daaff2b4de07.jpg" }
+    ];
+
+    const $input = $('#search-input');
+    const $auto = $('#autocomplete-list');
+
+    $input.on('keyup', function() {
+        const value = $(this).val().toLowerCase();
+        $auto.empty();
+
+        const filtered = products.filter(p => p.name.toLowerCase().includes(value));
+
+        filtered.forEach(p => {
+            const $li = $(`
+                <li class="auto-item" style="display:flex; align-items:center; cursor:pointer; margin-bottom:5px;">
+                    <img src="${p.img}" alt="${p.name}" style="width:50px; height:50px; object-fit:cover; margin-right:10px;">
+                    <span>${p.name}</span>
+                </li>
+            `);
+            $auto.append($li);
+
+            $li.on('click', function() {
+                $input.val(p.name);
+                $auto.empty();
+            });
+        });
+    });
+});
+
+
+
+
+$(document).ready(function() {
+    console.log("jQuery is ready!");
+});
