@@ -54,6 +54,55 @@
             </div>
  
         </div>
+        <div class="rating_section">
+        <p>Give your rating for SpongeBob series</p>
+        <div class="rating" id="rating1" data-max="5" aria-label="Rate from 1 to 5">
+            <!-- data-value хранит «цену» звезды -->
+            <span class="star" data-value="1" aria-hidden="true">★</span>
+            <span class="star" data-value="2" aria-hidden="true">★</span>
+            <span class="star" data-value="3" aria-hidden="true">★</span>
+            <span class="star" data-value="4" aria-hidden="true">★</span>
+            <span class="star" data-value="5" aria-hidden="true">★</span>
+            <input type="hidden" name="rating" id="ratingValue" value="0">
+            
+        </div>
+        <p id="ratingText">Your rating: 0</p>
+        </div>
+
+        <!-- 1) textContent (безопасный текст, без HTML) -->
+<div class="row">
+  <button id="btnText" class="btn">Show SpongeBob rating on IMDb</button>
+  <div id="outText" class="box">Hidden</div>
+</div>
+
+<!-- 2) innerHTML (вставляем форматированный HTML) -->
+<div class="row">
+  <button id="btnHTML" class="btn">Show SpongeBob rating on Rating Graph</button>
+  <div id="outHTML" class="box">Hidden</div>
+</div>
+
+<!--  -----------------------------------------------         -->
+<div class="card">
+  <h3>Who is SpongeBob</h3>
+  <p class="card-excerpt">
+    
+  </p>
+  SpongeBob is an animated character who first appeared on screen in 1999. He lives in an underwater city called Bikini Bottom.
+  <p class="card-more" style="display:none;">
+    SpongeBob SquarePants was created by Stephen Hilenburg and has become an iconic character for children and adults alike. The series follows the various adventures of SpongeBob and his friends, including Patrick, Squidward, and others.
+  </p>
+  
+  <button id="readMoreBtn" class="btn2">Read more</button>
+</div>
+
+<div id="greeting"></div>
+
+
+
+
+
+        
+
 
     </aside>
     <section class="content">
@@ -112,15 +161,18 @@
         </div>
         </div>
     
-        <section id="bg-color-section" class="container my-5 text-center">
+       <!-- <section id="bg-color-section" class="container my-5 text-center">
             <button class="change-bg-btn"><span> Change Background Theme </span> </button>
-        </section>
-        
+        </section> -->
+        <div>
+            <button id="showArrayBtn" class="btn">Показать массив</button>
+            <div id="arrayOutput"></div>
+        </div>
     </section>
 
     
     
-
+ 
     
 
 
