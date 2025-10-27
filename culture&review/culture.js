@@ -79,3 +79,50 @@ function updateTime() {
 
 updateTime();
 setInterval(updateTime, 1000);
+
+//changing background color
+const image = document.querySelector('header img');
+const header = document.querySelector('header');
+const colors = ['#f0e68c', '#add8e6', '#90ee90', '#ffb6c1', '#ffa07a', '#c8c8ff'];
+const colorsNight = ['#bfb66a', '#7cadbc', '#61b861', '#c88189', '#c57757', '#8a8abf'];
+let currentIndex = 0;
+header.style.backgroundColor = colors[0];
+
+image.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % colors.length;
+    if (document.body.classList.contains('night')) {
+        header.style.backgroundColor = colorsNight[currentIndex];
+    } else {
+        header.style.backgroundColor = colors[currentIndex];
+    }
+})
+
+
+ /* 4) Sound: Web Audio API (без внешних файлов)
+ */
+function playPing(duration = 180, frequency = 660, type = 'sine'){
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AudioCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = type;
+  osc.frequency.value = frequency;
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  // маленький fade-out, чтобы не щёлкало
+  gain.gain.setValueAtTime(0.2, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration/1000);
+
+  osc.start();
+  osc.stop(ctx.currentTime + duration/1000);
+}
+const soundBtn = document.getElementById('playSoundBtn');
+if (soundBtn) {
+  const clickSound = new Audio('Sound.mp3'); // путь к твоему звуку
+  soundBtn.addEventListener('click', () => {
+    clickSound.currentTime = 0; // перезапускает с начала при повторных кликах
+    clickSound.play();
+  });
+}
