@@ -1,3 +1,4 @@
+// Run after DOM loaded
 document.addEventListener('DOMContentLoaded', function () {
   console.log("🎬 DOM loaded - initializing cartoon interactive features");
 
@@ -177,4 +178,221 @@ document.addEventListener('DOMContentLoaded', function () {
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
   })();
+
+  // ===== 8) jQuery Scroll Progress Bar =====
+  if (typeof $ !== 'undefined') {
+    initScrollProgressBar();
+  }
 });
+
+// ===== jQuery Scroll Progress Bar Function =====
+function initScrollProgressBar() {
+    console.log("📊 Initializing enhanced scroll progress bar with UX elements");
+    
+    // Create multiple progress elements
+    const progressHTML = `
+        <!-- Horizontal Progress Bar -->
+        <div id="scrollProgressContainer">
+            <div id="scrollProgressBar">
+                <div class="progress-shine"></div>
+            </div>
+        </div>
+        
+        <!-- Vertical Progress Bar -->
+        <div id="verticalProgressContainer">
+            <div id="verticalProgressBar"></div>
+        </div>
+        
+        <!-- Section Engagement Dots -->
+        <div class="progress-engagement" id="sectionDots">
+            <div class="engagement-dot" data-section="Characters" data-target="#characters"></div>
+            <div class="engagement-dot" data-section="Rating" data-target="#episode-rating"></div>
+            <div class="engagement-dot" data-section="Favorite" data-target="#favorite"></div>
+        </div>
+        
+        <!-- Achievement Badge Container -->
+        <div id="achievementContainer"></div>
+    `;
+    
+    $('body').prepend(progressHTML);
+    
+    const $progressBar = $('#scrollProgressBar');
+    const $verticalProgressBar = $('#verticalProgressBar');
+    const $sectionDots = $('.engagement-dot');
+    
+    // Define sections for engagement
+    const sections = [
+        { id: '#characters', name: 'Main Characters', achievement: '👥 Met the Crew' },
+        { id: '#episode-rating', name: 'Episode Rating', achievement: '⭐ Rated Content' },
+        { id: '#favorite', name: 'Favorite Character', achievement: '❤️ Picked Favorite' }
+    ];
+    
+    const achievedSections = new Set();
+    
+    // Update progress on scroll
+    $(window).on('scroll', function() {
+        const windowHeight = $(window).height();
+        const documentHeight = $(document).height();
+        const scrollTop = $(window).scrollTop();
+        
+        const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+        const roundedProgress = Math.min(100, Math.max(0, progress));
+        
+        // Update both progress bars
+        $progressBar.css('width', roundedProgress + '%');
+        $verticalProgressBar.css('height', roundedProgress + '%');
+        
+        // Change gradient based on progress
+        updateProgressColor(roundedProgress);
+        
+        // Update section engagement dots
+        updateSectionDots();
+        
+        // Check for section achievements
+        checkSectionAchievements();
+        
+        // Add celebration for milestones
+        checkMilestones(roundedProgress);
+    });
+    
+    function updateProgressColor(progress) {
+        let gradient;
+        
+        if (progress < 25) {
+            gradient = 'linear-gradient(90deg, #ff6b6b, #ffd93d)';
+        } else if (progress < 50) {
+            gradient = 'linear-gradient(90deg, #ffd93d, #6bcf7f)';
+        } else if (progress < 75) {
+            gradient = 'linear-gradient(90deg, #6bcf7f, #4d96ff)';
+        } else {
+            gradient = 'linear-gradient(90deg, #4d96ff, #9d4edd)';
+        }
+        
+        $progressBar.css('background', gradient);
+        $verticalProgressBar.css('background', 'linear-gradient(to bottom, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9d4edd)');
+    }
+    
+    function updateSectionDots() {
+        const scrollTop = $(window).scrollTop() + 100;
+        
+        $sectionDots.each(function() {
+            const $dot = $(this);
+            const target = $dot.data('target');
+            const $targetSection = $(target);
+            
+            if ($targetSection.length) {
+                const sectionTop = $targetSection.offset().top;
+                const sectionBottom = sectionTop + $targetSection.outerHeight();
+                
+                if (scrollTop >= sectionTop && scrollTop <= sectionBottom) {
+                    $dot.addClass('active').removeClass('completed');
+                } else if (scrollTop > sectionBottom) {
+                    $dot.removeClass('active').addClass('completed');
+                } else {
+                    $dot.removeClass('active completed');
+                }
+            }
+        });
+    }
+    
+    function checkSectionAchievements() {
+        sections.forEach(section => {
+            const $section = $(section.id);
+            if ($section.length && !achievedSections.has(section.id)) {
+                const sectionTop = $section.offset().top;
+                const scrollTop = $(window).scrollTop() + $(window).height() / 2;
+                
+                if (scrollTop > sectionTop) {
+                    achievedSections.add(section.id);
+                    showAchievement(section.achievement);
+                }
+            }
+        });
+    }
+    
+    function checkMilestones(progress) {
+        const milestones = [25, 50, 75, 100];
+        milestones.forEach(milestone => {
+            if (progress >= milestone && progress < milestone + 1) {
+                showAchievement(`🎯 ${milestone}% Viewed`);
+                $progressBar.addClass('progress-celebration');
+                setTimeout(() => {
+                    $progressBar.removeClass('progress-celebration');
+                }, 1500);
+            }
+        });
+        
+        // Final completion
+        if (progress >= 99.9) {
+            $progressBar.addClass('progress-complete');
+            showAchievement('🏆 Page Complete!');
+            setTimeout(() => {
+                $progressBar.removeClass('progress-complete');
+            }, 6000);
+        }
+    }
+    
+    function showAchievement(message) {
+        const badge = $(`
+            <div class="achievement-badge">
+                🎉 ${message}
+            </div>
+        `);
+        
+        $('#achievementContainer').append(badge);
+        
+        setTimeout(() => {
+            badge.addClass('show');
+        }, 100);
+        
+        setTimeout(() => {
+            badge.removeClass('show');
+            setTimeout(() => badge.remove(), 500);
+        }, 3000);
+        
+        console.log(`🏆 Achievement: ${message}`);
+    }
+    
+    // Click on dots to scroll to sections
+    $sectionDots.on('click', function() {
+        const $dot = $(this);
+        const target = $dot.data('target');
+        const $targetSection = $(target);
+        
+        if ($targetSection.length) {
+            $('html, body').animate({
+                scrollTop: $targetSection.offset().top - 80
+            }, 800);
+        }
+    });
+    
+    // Add hover effect to show percentage
+    $('#scrollProgressContainer, #verticalProgressContainer').on('mouseenter', function() {
+        showProgressTooltip();
+    }).on('mouseleave', function() {
+        hideProgressTooltip();
+    });
+    
+    function showProgressTooltip() {
+        const scrollTop = $(window).scrollTop();
+        const documentHeight = $(document).height();
+        const windowHeight = $(window).height();
+        const progress = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+        
+        const tooltip = $(`
+            <div id="progressTooltip">
+                📊 Scroll Progress: ${progress}%
+                <br>
+                <small>Sections: ${achievedSections.size}/${sections.length}</small>
+            </div>
+        `);
+        
+        $('body').append(tooltip);
+    }
+    
+    function hideProgressTooltip() {
+        $('#progressTooltip').remove();
+    }
+    
+    console.log("✅ Enhanced scroll progress bar with UX elements initialized");
+}

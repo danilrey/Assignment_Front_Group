@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "SpongeBob was created by marine biologist Stephen Hillenburg.",
     "Gary meows like a cat 🐌.",
     "Squidward actually has six tentacles.",
-    "The Krabby Patty’s secret formula is unknown!",
+    "The Krabby Patty's secret formula is unknown!",
     "SpongeBob lives in a pineapple under the sea."
   ];
   document.getElementById("factBtn").addEventListener("click", () => {
@@ -157,8 +157,152 @@ document.addEventListener("DOMContentLoaded", () => {
       item.classList.toggle("fade-in", show);
     });
   });
+
+  // ===== jQuery Search Highlighting =====
+  if (typeof $ !== 'undefined') {
+    initSearchHighlighting();
+  }
 });
 
-
-
- 
+// ===== jQuery Search Highlighting Function =====
+function initSearchHighlighting() {
+    console.log("🔍 Initializing search highlighting");
+    
+    // Create search box HTML
+    const searchHTML = `
+        <div class="card p-3 mb-4 search-container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h4 class="mb-2">🔍 Search Content</h4>
+                    <p class="text-muted small mb-0">Highlight matching words on this page</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Enter keyword to highlight...">
+                        <button id="searchBtn" class="btn btn-primary">Search</button>
+                        <button id="clearSearch" class="btn btn-outline-secondary">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <div id="searchResults" class="mt-2 small text-muted"></div>
+        </div>
+    `;
+    
+    // Insert after hero section
+    $('.hero').after(searchHTML);
+    
+    let currentHighlight = null;
+    
+    // Search function
+    $('#searchBtn').on('click', function() {
+        performSearch();
+    });
+    
+    $('#searchInput').on('keypress', function(e) {
+        if (e.which === 13) {
+            performSearch();
+        }
+    });
+    
+    $('#clearSearch').on('click', function() {
+        clearHighlight();
+    });
+    
+    function performSearch() {
+        const searchTerm = $('#searchInput').val().trim();
+        
+        if (!searchTerm) {
+            showNotification('Please enter a search term', 'warning');
+            return;
+        }
+        
+        // Clear previous highlight
+        clearHighlight();
+        
+        // Search in all text content (excluding inputs, buttons, etc.)
+        const $searchableElements = $('h1, h2, h3, h4, h5, h6, p, li, .card-text, .faq-item');
+        let matchCount = 0;
+        
+        $searchableElements.each(function() {
+            const $element = $(this);
+            const originalHTML = $element.data('original-html') || $element.html();
+            $element.data('original-html', originalHTML);
+            
+            // Create regex for case-insensitive search
+            const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+            
+            if (regex.test(originalHTML)) {
+                const highlightedHTML = originalHTML.replace(
+                    regex, 
+                    '<mark class="search-highlight">$1</mark>'
+                );
+                $element.html(highlightedHTML);
+                matchCount++;
+            }
+        });
+        
+        // Update results counter
+        if (matchCount > 0) {
+            $('#searchResults').html(`<span class="text-success">✓ Found ${matchCount} matches for "${searchTerm}"</span>`);
+            showNotification(`Found ${matchCount} matches for "${searchTerm}"`, 'success');
+            
+            // Scroll to first match
+            $('html, body').animate({
+                scrollTop: $('.search-highlight').first().offset().top - 100
+            }, 500);
+        } else {
+            $('#searchResults').html(`<span class="text-danger">✗ No matches found for "${searchTerm}"</span>`);
+            showNotification(`No matches found for "${searchTerm}"`, 'error');
+        }
+        
+        currentHighlight = searchTerm;
+    }
+    
+    function clearHighlight() {
+        if (currentHighlight) {
+            $('[data-original-html]').each(function() {
+                const $element = $(this);
+                const originalHTML = $element.data('original-html');
+                $element.html(originalHTML);
+            });
+            
+            $('#searchResults').html('');
+            $('#searchInput').val('');
+            currentHighlight = null;
+            showNotification('Search highlights cleared', 'info');
+        }
+    }
+    
+    function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    
+    // Simple notification function (reusable)
+    function showNotification(message, type = 'info') {
+        // Remove existing notification
+        $('.custom-notification').remove();
+        
+        const notification = $(`
+            <div class="custom-notification ${type}" style="
+                transform: translateX(100%);
+            ">
+                ${message}
+            </div>
+        `);
+        
+        $('body').append(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.css('transform', 'translateX(0)');
+        }, 100);
+        
+        // Auto remove
+        setTimeout(() => {
+            notification.css('transform', 'translateX(100%)');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+    
+    console.log("✅ Search highlighting initialized");
+}

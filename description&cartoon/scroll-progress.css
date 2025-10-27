@@ -1,0 +1,189 @@
+/* ===== Scroll Progress Bar Styles ===== */
+#scrollProgressContainer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 6px !important;
+    background: transparent !important;
+    z-index: 10000 !important;
+    pointer-events: none !important;
+}
+
+#scrollProgressBar {
+    height: 100% !important;
+    width: 0% !important;
+    background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9d4edd) !important;
+    border-radius: 0 4px 4px 0 !important;
+    transition: width 0.1s ease !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.progress-shine {
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.6), 
+        transparent
+    ) !important;
+    animation: shine 2s infinite !important;
+}
+
+#scrollProgressBar::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 10px !important;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8)) !important;
+    border-radius: 0 4px 4px 0 !important;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Pulse animation when complete */
+@keyframes pulseComplete {
+    0% { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    50% { box-shadow: 0 2px 20px rgba(77, 150, 255, 0.6); }
+    100% { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+}
+
+.progress-complete {
+    animation: pulseComplete 2s ease-in-out 3 !important;
+}
+
+/* Progress tooltip */
+#progressTooltip {
+    position: fixed !important;
+    top: 15px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: rgba(0,0,0,0.8) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    z-index: 10001 !important;
+    white-space: nowrap !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+/* ===== Enhanced Progress Bar with UX Elements ===== */
+.progress-engagement {
+    position: fixed !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+.engagement-dot {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: #dee2e6 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+}
+
+.engagement-dot.active {
+    background: #4d96ff !important;
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 10px rgba(77, 150, 255, 0.5) !important;
+}
+
+.engagement-dot.completed {
+    background: #6bcf7f !important;
+}
+
+.engagement-dot::after {
+    content: attr(data-section) !important;
+    position: absolute !important;
+    right: 25px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(0,0,0,0.8) !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    pointer-events: none !important;
+}
+
+.engagement-dot:hover::after {
+    opacity: 1 !important;
+}
+
+/* Vertical progress bar alternative */
+#verticalProgressContainer {
+    position: fixed !important;
+    right: 30px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 8px !important;
+    height: 200px !important;
+    background: rgba(222, 226, 230, 0.3) !important;
+    border-radius: 10px !important;
+    z-index: 9999 !important;
+}
+
+#verticalProgressBar {
+    width: 100% !important;
+    height: 0% !important;
+    background: linear-gradient(to bottom, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9d4edd) !important;
+    border-radius: 10px !important;
+    transition: height 0.1s ease !important;
+    position: relative !important;
+}
+
+/* Celebration animation */
+@keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.progress-celebration {
+    animation: celebrate 0.5s ease-in-out 3 !important;
+}
+
+/* Achievement badges */
+.achievement-badge {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    z-index: 10000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.5s ease !important;
+}
+
+.achievement-badge.show {
+    transform: translateX(0) !important;
+}
