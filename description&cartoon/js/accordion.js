@@ -22,13 +22,14 @@ function initAccordion() {
                 
                 // Toggle visibility with smooth transition
                 if (isVisible) {
-                    answer.style.display = 'none';
-                    item.style.background = '#e6f3ff';
-                    console.log(`🔽 FAQ ${index + 1} collapsed`);
-                } else {
                     answer.style.display = 'block';
-                    item.style.background = '#d4e9ff';
+                    item.style.background = '#e6f3ff';
                     console.log(`🔼 FAQ ${index + 1} expanded`);
+                } else {
+                    answer.style.display = 'none';
+                    item.style.background = '#d4e9ff';
+                    
+                     console.log(`🔽 FAQ ${index + 1} collapsed`);
                 }
                 
                 // Smooth transition effect
