@@ -92,3 +92,30 @@ body.night .star { color: #bbb; }
   .hero { padding: 2rem 1rem !important; }
   #stars { flex-wrap: wrap; }
 }
+
+
+/* Стили для hover эффектов через CSS классы */
+.button-hover {
+    background-color: #ffd700 !important;
+    color: #000 !important;
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Специфичные стили для разных типов кнопок */
+.btn-primary:hover {
+    background-color: #0a4eb8 !important;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800 !important;
+}
+
+.btn-info:hover {
+    background-color: #138496 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0b5bd3 !important;
+    color: white !important;
+}
