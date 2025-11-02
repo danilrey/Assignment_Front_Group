@@ -1,9 +1,13 @@
 const colors = ['#f0e68c', '#add8e6', '#90ee90', '#ffb6c1', '#ffa07a', '#c8c8ff'];
 const colorsNight = ['#bfb66a', '#7cadbc', '#61b861', '#c88189', '#c57757', '#8a8abf'];
-let currentIndex = 0;
+let currentIndex = localStorage.getItem('colorIndex') || 0;
+const emailInput = $("input[type='email']")
+const submitBtn = $(".submit-btn")
+const textarea = $("textarea")
 
 $(document).ready(function() {
-    console.log("Page is ready")
+    const savedTheme = localStorage.getItem('isNight') === 'true'
+    applyTheme(savedTheme)
 
     //prevent form from submitting
     $("form").submit(function(event) {
@@ -19,23 +23,15 @@ $(document).ready(function() {
     })
 
     //form validation
-    const emailInput = $("input[type='email']")
-    const submitBtn = $(".submit-btn")
-    const textarea = $("textarea")
-
     emailInput.on("input", function() {
-        const email = emailInput.val()
-        const isValid = validateEmail(email)
-        emailInput.toggleClass("error", !isValid)
-        if (submitBtn) submitBtn.prop("disabled", !isValid)
-    })
+        updateSubmitState();
+    });
 
-    textarea.on( "input", function() {
-        const feedback = textarea.val().trim()
-        const isValid = feedback.length >= 5;
-        textarea.toggleClass("error", !isValid)
-        if (submitBtn) submitBtn.prop("disabled", !isValid)
-    })
+    textarea.on("input", function() {
+        updateSubmitState();
+    });
+
+    updateSubmitState();
 
     //pop-up window
     const closeBtn = $(".pop-up-close")
@@ -88,9 +84,10 @@ $(document).ready(function() {
     })
 
     //changing background color
-    $('header').css('background-color', colors[0])
+    $('header').css('background-color', savedTheme ? colorsNight[currentIndex] : colors[currentIndex])
     logoImg.click(function() {
         currentIndex = (currentIndex + 1) % colors.length;
+        localStorage.setItem('colorIndex', currentIndex)
         const isNight = body.hasClass("night")
         applyTheme(isNight)
     })
@@ -101,10 +98,6 @@ $(document).ready(function() {
             $('.citation').fadeToggle(600)
         })
     })
-
-    //subscriber counter
-    subscribersCounter();
-
 
     //scroll progress bar
     $(window).scroll(function() {
@@ -161,25 +154,27 @@ async function toggleAudio() {
 }
 
 function applyTheme(isNight) {
+    localStorage.setItem('isNight', isNight)
     $('body').toggleClass('night', isNight)
     $('#theme-toggle').text(isNight ? '☀️' : '🌙')
-    $('header img').attr('src', isNight ? '../assets/gary.png' : '../assets/sponge_bob.png')
+    const basePath = window.location.hostname.includes('github.io') ? '/Assignment_Front_group' : '..'
+    $('header img').attr('src', isNight ? `${basePath}/assets/gary.png` : `${basePath}/assets/sponge_bob.png`)
     $('header').css('background-color', isNight ? colorsNight[currentIndex] : colors[currentIndex])
 }
 
-function subscribersCounter() {
-    const $el = $('.subscribers');
-    if (!$el.length) return;
+function updateSubmitState() {
+    const emailValid = isValidOrEmpty(emailInput, validateEmail);
+    const textValid = isValidOrEmpty(textarea, v => v.length >= 5);
 
-    let count = 1;
+    emailInput.toggleClass('error', !emailValid);
+    textarea.toggleClass('error', !textValid);
 
-    function update() {
-        count += Math.random() * 0.02;
-        $el.text("Subscribers counter: " + Math.floor(count));
-        requestAnimationFrame(update);
-    }
-
-    update();
+    if (submitBtn) submitBtn.prop('disabled', !(emailValid && textValid));
 }
 
-
+function isValidOrEmpty($el, validator) {
+    const val = ($el.val() || '').trim();
+    const required = $el.prop('required') || $el.attr('data-required') === 'true';
+    if (!val) return !required;
+    return validator ? validator(val) : true;
+}

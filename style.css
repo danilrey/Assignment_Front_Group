@@ -115,3 +115,94 @@ header img:hover {
     will-change:width;
     border-radius:999px;
 }
+
+body.night .progress-bar {
+    background:linear-gradient(90deg,#7cadbc,#c88189 40%,#c57757 100%);
+}
+
+@media (max-width: 1024px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 8px 12px;
+    }
+
+    header img {
+        height: 64px;
+    }
+
+    header a {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 16px;
+    }
+
+    #theme-toggle {
+        font-size: 1.25rem;
+        margin-left: 0.5rem;
+    }
+
+    footer {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .progress-wrap {
+        height: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        align-items: stretch;
+    }
+
+    header {
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    header a {
+        padding: 8px 12px;
+        font-size: 15px;
+        display: inline-block;
+        border-radius: 12px;
+    }
+
+    header img {
+        height: 48px;
+    }
+
+    header img:hover {
+        transform: none;
+    }
+
+    #theme-toggle {
+        align-self: flex-end;
+        margin-left: 0;
+        margin-top: 4px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .progress-wrap {
+        height: 4px;
+    }
+
+    header a,
+    #theme-toggle {
+        line-height: 1;
+    }
+}
+

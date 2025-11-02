@@ -6,8 +6,10 @@ span {
     background-color: #bbdfd1;
     padding: 6px 6px 0 6px;
     border-radius: 4px;
-    position: relative;
-    right: 600px;
+}
+
+body.night span {
+    background-color: #8fafa5;
 }
 
 .main-content {
@@ -17,13 +19,12 @@ span {
 }
 
 .citation {
-    margin: 0 0 0 200px;
+    margin: 50px 0 50px 200px;
     font-size: 20px;
     font-style: italic;
     text-decoration: underline 2px solid #719870;
     transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s;
 }
-
 
 h1 {
     font-size: 36px;
@@ -66,6 +67,10 @@ body.night hr {
     cursor: pointer;
 }
 
+body.night .gallery-item {
+    border: 2px solid #8fafa5;
+}
+
 .gallery-item img {
     width: 100%;
     height: 100%;
@@ -100,9 +105,77 @@ body.night hr {
     opacity: 1;
 }
 
-.subscribers {
-    font-size: 24px;
-    color: #5a7a5a;
-    margin: 150px 0 200px 0;
-    text-align: center;
+@media (max-width: 1024px) {
+    .citation {
+        margin: 18px 24px;
+        font-size: 18px;
+        text-align: center;
+        max-width: 90%;
+        text-decoration-thickness: 2px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 220px;
+        gap: 16px;
+        max-width: 900px;
+        margin: 0 auto 60px;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    .gallery-item {
+        border-radius: 10px;
+    }
+
+    .gallery-caption {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    .gallery-title {
+        font-size: 24px;
+        margin: 40px 0 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .citation {
+        margin: 16px 12px;
+        font-size: 16px;
+        text-align: center;
+        max-width: 100%;
+        text-decoration-thickness: 2px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 160px;
+        gap: 12px;
+        max-width: 480px;
+        margin: 0 auto 48px;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    .gallery-item {
+        border-radius: 8px;
+    }
+
+    .gallery-item img {
+        transition: transform 0.25s ease;
+    }
+    .gallery-item:hover img {
+        transform: none;
+    }
+
+    .gallery-caption {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .gallery-title {
+        font-size: 20px;
+        margin: 28px 0 16px;
+    }
 }
