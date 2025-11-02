@@ -157,7 +157,7 @@ function applyTheme(isNight) {
     localStorage.setItem('isNight', isNight)
     $('body').toggleClass('night', isNight)
     $('#theme-toggle').text(isNight ? '☀️' : '🌙')
-    const basePath = window.location.hostname.includes('github.io') ? '/Assignment_Front_group' : '..'
+    const basePath = window.location.hostname.includes('github.io') ? '/Assignment_Front_Group' : '..'
     $('header img').attr('src', isNight ? `${basePath}/assets/gary.png` : `${basePath}/assets/sponge_bob.png`)
     $('header').css('background-color', isNight ? colorsNight[currentIndex] : colors[currentIndex])
 }
