@@ -65,7 +65,7 @@ function setupAccordion(root){
 // Инициализация
 document.querySelectorAll('.accordion').forEach(setupAccordion);
 
-
+/*
 //current date
 const date = document.querySelector('.date');
 function updateTime() {
@@ -79,6 +79,7 @@ function updateTime() {
 
 updateTime();
 setInterval(updateTime, 1000);
+*/
 
 //changing background color
 const image = document.querySelector('header img');
@@ -99,7 +100,7 @@ image.addEventListener('click', () => {
 
 
  /* 4) Sound: Web Audio API (без внешних файлов)
- */
+ 
 function playPing(duration = 180, frequency = 660, type = 'sine'){
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   const ctx = new AudioCtx();
@@ -126,7 +127,7 @@ if (soundBtn) {
     clickSound.play();
   });
 }
-
+*/
 
 $(document).ready(function() {
   $(".copy-btn").on("click", function() {
@@ -186,9 +187,26 @@ $(document).ready(function() {
 });
 
 
+(function () {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
 
-$(document).ready(function() {
-      $("#hideBtn").click(function() {
-        $("#text").hide(); 
-      });
-    });
+  const apply = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    // Обновим текст и ARIA
+    const isDark = theme === 'dark';
+    btn.textContent = isDark ? '🌙 Night (переключить)' : '🌞 Day (переключить)';
+    btn.setAttribute('aria-pressed', String(isDark));
+  };
+
+  // Инициализация (с учётом раннего прелоада)
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  apply(cur);
+
+  // Переключение
+  btn.addEventListener('click', () => {
+    const next = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+    apply(next);
+  });
+})();
