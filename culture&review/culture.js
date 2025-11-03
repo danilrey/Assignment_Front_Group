@@ -126,3 +126,69 @@ if (soundBtn) {
     clickSound.play();
   });
 }
+
+
+$(document).ready(function() {
+  $(".copy-btn").on("click", function() {
+    const targetSelector = $(this).data("target");
+    const textToCopy = $(targetSelector).text();
+
+    // Copy text to clipboard
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      // Change button icon/text
+      const $btn = $(this);
+      const originalText = $btn.html();
+      $btn.html("✅ Copied");
+
+      // Trigger a custom "copy" event (optional, for extra logic)
+      $btn.trigger("copy");
+
+      // Show tooltip
+      $("#tooltip").text("Copied to clipboard!").fadeIn(300);
+      setTimeout(() => {
+        $("#tooltip").fadeOut(300);
+        $btn.html(originalText); // restore button
+      }, 2000);
+    });
+  });
+
+  // Example of reacting to the 'copy' event
+  $(".copy-btn").on("copy", function() {
+    console.log("Text copied successfully!");
+  });
+});
+
+
+
+$(document).ready(function() {
+  function lazyLoad() {
+    $(".lazy").each(function() {
+      const $img = $(this);
+      const imgTop = $img.offset().top;        // distance from top of page
+      const scrollTop = $(window).scrollTop(); // how far user scrolled
+      const windowHeight = $(window).height();
+
+      // If image is in or near the viewport
+      if (imgTop < scrollTop + windowHeight + 100) {
+        const src = $img.attr("data-src");
+        if (src && !$img.attr("src")) {
+          $img.attr("src", src).on("load", function() {
+            $(this).addClass("loaded");
+          });
+        }
+      }
+    });
+  }
+
+  // Run on scroll and on page load
+  $(window).on("scroll", lazyLoad);
+  lazyLoad(); // trigger on initial load too
+});
+
+
+
+$(document).ready(function() {
+      $("#hideBtn").click(function() {
+        $("#text").hide(); 
+      });
+    });
