@@ -312,3 +312,98 @@ code{background:#101522; padding:2px 6px; border-radius:6px; border:1px solid #2
     align-items: center;
     justify-content: center;
 }
+
+.clipboard {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.copy-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  gap: 10px;
+  width: 80%;
+}
+
+.text-snippet {
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 150px;
+  width: 95%;
+}
+
+.copy-btn {
+  background: #00effb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-left: 100px;
+}
+
+.copy-btn:hover {
+  background: #e5bb01;
+}
+
+#tooltip {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.title {
+  margin: 30px 0;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding-bottom: 100px;
+}
+
+.gallery img {
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  background-color: #ddd;
+  transition: opacity 0.6s;
+  opacity: 0;
+}
+
+.gallery img.loaded {
+  opacity: 1;
+}
+
+@media (max-width: 968px) {
+  .text-snippet {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 734px) {
+  .text-snippet {
+    font-size: 10px;
+  }
+}
