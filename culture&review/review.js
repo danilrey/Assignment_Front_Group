@@ -210,11 +210,29 @@ document.getElementById("greeting").textContent = getGreeting();
 
 
 
-const myArray = ['1', '2', '3', '4', '5'];
 
-const showArrayBtn = document.getElementById('showArrayBtn');
-const arrayOutput = document.getElementById('arrayOutput');
+$(document).ready(function() {
+  function showNotification(message) {
+    const $notification = $("#notification");
+    $notification.text(message).fadeIn(400).css("opacity", "1");
 
-showArrayBtn.addEventListener('click', () => {
-  arrayOutput.textContent = `Array: ${myArray.join(', ')}`;
+    // Fade out after 3 seconds
+    setTimeout(() => {
+      $notification.fadeOut(400, function() {
+        $(this).css("opacity", "0");
+      });
+    }, 3000);
+  }
+
+  $("#addToCart").click(function() {
+    showNotification("🛒 Link is copied!");
+  });
+
+  $("#loginSuccess").click(function() {
+    showNotification("✅ Picture is downloaded!");
+  });
+
+  $("#formSubmit").click(function() {
+    showNotification("📤 Form submitted successfully!");
+  });
 });
