@@ -448,3 +448,62 @@ $(document).ready(function() {
 $(document).ready(function() {
     console.log("jQuery is ready!");
 });
+
+
+// ===== Individual star ratings for each product =====
+document.querySelectorAll('.gallery .tile').forEach(tile => {
+  const stars = tile.querySelectorAll('.star');
+  const output = tile.querySelector('.rating-output');
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const rating = star.dataset.value;
+
+      // Удаляем выделение у всех звёзд
+      stars.forEach(s => s.classList.remove('active'));
+
+      // Добавляем выделение до выбранной звезды
+      for (let i = 0; i < rating; i++) {
+        stars[i].classList.add('active');
+      }
+
+      // Выводим результат
+      output.textContent = `Rated: ${rating} ★`;
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const galleries = document.querySelectorAll(".gallery .tile");
+
+  galleries.forEach(tile => {
+    const stars = tile.querySelectorAll(".star");
+    const output = tile.querySelector(".rating-output");
+
+    stars.forEach(star => {
+      star.addEventListener("click", () => {
+        const rating = parseInt(star.getAttribute("data-value"));
+
+        stars.forEach(s => s.classList.remove("active"));
+        stars.forEach(s => {
+          if (parseInt(s.getAttribute("data-value")) <= rating) {
+            s.classList.add("active");
+          }
+        });
+
+        output.textContent = `You rated this ${rating} ★`;
+      });
+
+      star.addEventListener("mouseover", () => {
+        const hoverValue = parseInt(star.getAttribute("data-value"));
+        stars.forEach(s => {
+          s.classList.toggle("hover", parseInt(s.getAttribute("data-value")) <= hoverValue);
+        });
+      });
+
+      star.addEventListener("mouseleave", () => {
+        stars.forEach(s => s.classList.remove("hover"));
+      });
+    });
+  });
+});
