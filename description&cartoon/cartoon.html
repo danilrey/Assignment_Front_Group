@@ -5,32 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Main Characters - SpongeBob SquarePants</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="cartoon.css"/>
-  <!-- New CSS files -->
-  <link rel="stylesheet" href="scroll-progress.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body class="page-cartoon">
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="#">SpongeBob Guide</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="navbarNav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../home&history/home.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../home&history/history.html">History</a></li>
-          <li class="nav-item"><a class="nav-link" href="../merch&places/merch.html">Merch</a></li>
-          <li class="nav-item"><a class="nav-link" href="../merch&places/places.html">Places</a></li>
-          <li class="nav-item"><a class="nav-link" href="description.html">Description</a></li>
-          <li class="nav-item"><a class="nav-link active" href="cartoon.html">Cartoon</a></li>
-          <li class="nav-item"><a class="nav-link" href="../culture&review/culture.html">Culture</a></li>
-          <li class="nav-item"><a class="nav-link" href="../culture&review/review.html">Review</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!-- IDENTICAL HEADER TO HISTORY PAGE -->
+  <header>
+    <img src="../assets/sponge_bob.png" alt="Spongebob">
+    <a href="../index.html">Home</a>
+    <a href="../home&history/history.html">History</a>
+    <a href="../merch&places/merch.html">Merch</a>
+    <a href="../merch&places/places.html">Places</a>
+    <a href="../description&cartoon/description.html">Description</a>
+    <a href="cartoon.html" class="active">Cartoon</a>
+    <a href="../culture&review/culture.html">Culture</a>
+    <a href="../culture&review/review.html">Review</a>
+    <button id="theme-toggle" aria-label="Toggle night mode">🌙</button>
+  </header>
 
   <!-- Carousel -->
   <section class="container-fluid px-0 mt-3">
@@ -218,14 +211,22 @@
     </section>
   </div>
 
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    <div>Designed by Motivation Time — Dana ✨</div>
+  <footer>
+    <div>Designed by Motivation Time members:</div>
+    <div>Zhandaulet Ermekov</div>
+    <div>Alan Kissamenov</div>
+    <div>Danila Bussygin</div>
+    <div>Dana Bekbosyn</div>
   </footer>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/cartoon-interactive.js"></script>
+  <div class="progress-wrap" aria-hidden="true">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
+
+  <!-- В конце перед закрывающим </body> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/unified.js"></script>
 
 </body>
 </html>

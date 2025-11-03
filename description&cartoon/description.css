@@ -1,121 +1,694 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Seaweed+Script&display=swap');
+
+* {
+    transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
 /* ===== Base ===== */
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background-color: #f0f8ff;
-  color: #333;
-  transition: background-color 0.5s ease, color 0.5s ease;
-  margin: 0; padding: 0;
+    margin: 0;
+    font-family: "Luckiest Guy", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #222;
+    min-height: 100vh;
 }
 
-/* Night theme */
-body.night { background-color: #1b1b2f; color: #f8f9fa; }
-body.night .navbar { background-color: #212529 !important; }
-body.night .card { background-color: #2e2e3e; color: #f8f9fa; box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-body.night footer { background-color: #101018; }
+body.night {
+    background: #403f3f;
+    color: #f1f1f1;
+}
+
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Цвета из мультфильма SpongeBob */
+:root {
+    --spongebob-yellow: #ffd90f;
+    --patrick-pink: #ff6b9d;
+    --squidward-blue: #6b8cff;
+    --sandy-brown: #d2691e;
+    --krabs-red: #ff4444;
+    --plankton-green: #32cd32;
+    --bikini-bottom-blue: #87ceeb;
+    --pineapple-orange: #ffa500;
+    --jellyfish-purple: #9370db;
+    --krusty-krab-red: #dc143c;
+}
+
+/* HEADER - ЖЕЛТЫЙ ФОН #f0e68c */
+header {
+    padding: 6px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 24px;
+    background: #f0e68c !important;
+    position: relative;
+    z-index: 1000;
+}
+
+body.night header {
+    background: #bfb66a !important;
+}
+
+header a {
+    padding: 24px !important;
+    text-decoration: none;
+    color: #333 !important;
+    font-size: 18px !important;
+    display: block;
+    border-radius: 200px;
+    transition: background 0.2s !important;
+    font-family: "Luckiest Guy", cursive !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body.night header a {
+    color: #f1f1f1 !important;
+}
+
+header a.active,
+header a:hover {
+    background: #bbdfd1 !important;
+    color: #333 !important;
+}
+
+body.night header a.active,
+body.night header a:hover {
+    background: #8fafa5 !important;
+    color: #f1f1f1 !important;
+}
+
+header img {
+    width: auto;
+    height: 86px;
+    transition: transform 0.2s;
+    display: block !important;
+}
+
+header img:hover {
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+
+#theme-toggle {
+    background: none !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    cursor: pointer;
+    margin-left: 1rem !important;
+    padding: 0 !important;
+    color: inherit !important;
+}
+
+/* FOOTER */
+footer {
+    font-size: 14px;
+    margin-top: auto;
+    padding: 24px;
+    width: 100%;
+    background: #f0e68c;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.night footer {
+    background: #bfb66a;
+    color: #D3D3D3;
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 8px;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0,0,0,0.04), rgba(255,255,255,0.02));
+    display: block;
+    z-index: 1001;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #add8e6, #ffb6c1 40%, #ffa07a 100%);
+    transition: width 150ms linear;
+    will-change: width;
+    border-radius: 999px;
+}
+
+body.night .progress-bar {
+    background: linear-gradient(90deg, #7cadbc, #c88189 40%, #c57757 100%);
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1024px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 8px 12px;
+    }
+
+    header img {
+        height: 64px;
+    }
+
+    header a {
+        padding: 12px !important;
+        font-size: 16px !important;
+        border-radius: 16px;
+    }
+
+    #theme-toggle {
+        font-size: 1.25rem !important;
+        margin-left: 0.5rem !important;
+    }
+
+    footer {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .progress-wrap {
+        height: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        align-items: stretch;
+    }
+
+    header {
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    header a {
+        padding: 8px 12px !important;
+        font-size: 15px !important;
+        display: inline-block;
+        border-radius: 12px;
+    }
+
+    header img {
+        height: 48px;
+    }
+
+    header img:hover {
+        transform: none;
+    }
+
+    #theme-toggle {
+        align-self: flex-end;
+        margin-left: 0 !important;
+        margin-top: 4px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .progress-wrap {
+        height: 4px;
+    }
+
+    header a,
+    #theme-toggle {
+        line-height: 1;
+    }
+}
+
+/* СТИЛИ ДЛЯ КОНТЕНТА СТРАНИЦЫ DESCRIPTION - В СТИЛЕ SPONGEBOB */
+
+body {
+    background: #e6f7ff; /* Светло-голубой как океан */
+}
+
+body.night {
+    background: #2c3e50;
+}
 
 /* Headings */
-h1 { font-size: 2.5rem; color: #2c3e50; }
-h2 { font-size: 2rem; color: #34495e; }
-h3, h4 { font-size: 1.75rem; color: #2c3e50; }
-p, li { font-size: 1rem; line-height: 1.6; }
-
-/* Navbar */
-.navbar-brand { font-weight: bold; font-size: 1.5rem; }
-.navbar-nav .nav-link { font-weight: 500; transition: color 0.3s ease; }
-.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
-  color: #ffd700 !important; font-weight: bold;
+h1 { 
+    font-size: 2.5rem; 
+    color: #333; 
+    font-family: "Luckiest Guy", cursive;
 }
 
-/* Hero */
+h2 { 
+    font-size: 2rem; 
+    color: #333; 
+    font-family: "Luckiest Guy", cursive;
+}
+
+h3, h4 { 
+    font-size: 1.75rem; 
+    color: #333; 
+    font-family: "Luckiest Guy", cursive;
+}
+
+body.night h1,
+body.night h2,
+body.night h3,
+body.night h4 {
+    color: #f1f1f1;
+}
+
+p, li { 
+    font-size: 1rem; 
+    line-height: 1.6; 
+}
+
+/* Hero секция */
 .hero {
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  color: white; margin-bottom: 2rem; border-radius: 10px;
+    background: var(--spongebob-yellow);
+    color: #333; 
+    margin-bottom: 2rem; 
+    border-radius: 15px;
+    border: 4px solid var(--krusty-krab-red);
+    box-shadow: 0 8px 20px rgba(255, 217, 15, 0.3);
 }
-#dateTime { font-size: .95rem; color: #eee; }
 
-/* Cards */
+body.night .hero {
+    background: var(--patrick-pink);
+    color: #fff;
+    border: 4px solid var(--squidward-blue);
+}
+
+/* Карточки с цветами персонажей */
 .card {
-  border-radius: 15px; border: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
-  transition: transform .3s ease, box-shadow .3s ease;
+    border-radius: 15px; 
+    border: 3px solid;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    background: #fff;
 }
-.card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
 
-/* Read More (smooth) */
-#hiddenText { display:none; opacity:0; transition: opacity .3s ease; }
-#hiddenText.show { display:block; opacity:1; }
+.card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2); 
+}
+
+/* Разные цвета для разных секций */
+/* About секция - желтый как SpongeBob */
+.card:nth-child(2) {
+    border-color: var(--spongebob-yellow);
+    background: #fffacd;
+}
+
+/* Gallery секция - голубой как океан */
+.card:nth-child(3) {
+    border-color: var(--bikini-bottom-blue);
+    background: #e6f7ff;
+}
+
+/* Facts секция - зеленый как Plankton */
+.card:nth-child(4) {
+    border-color: var(--plankton-green);
+    background: #f0fff0;
+}
+
+/* Form секция - розовый как Patrick */
+.card:nth-child(5) {
+    border-color: var(--patrick-pink);
+    background: #ffe4e1;
+}
+
+/* FAQ секция - синий как Squidward */
+.card:nth-child(6) {
+    border-color: var(--squidward-blue);
+    background: #e6f3ff;
+}
+
+body.night .card {
+    background: #555;
+}
+
+body.night .card:nth-child(2) {
+    border-color: var(--patrick-pink);
+}
+
+body.night .card:nth-child(3) {
+    border-color: var(--squidward-blue);
+}
+
+body.night .card:nth-child(4) {
+    border-color: var(--plankton-green);
+}
+
+body.night .card:nth-child(5) {
+    border-color: var(--spongebob-yellow);
+}
+
+body.night .card:nth-child(6) {
+    border-color: var(--bikini-bottom-blue);
+}
+
+/* Read More */
+#hiddenText { 
+    display:none; 
+    opacity:0; 
+    transition: opacity .3s ease; 
+}
+#hiddenText.show { 
+    display:block; 
+    opacity:1; 
+}
 
 /* Gallery */
 .thumb {
-  cursor: pointer; border: 3px solid transparent; border-radius: 8px;
-  transition: transform .3s ease, border-color .3s ease;
+    cursor: pointer; 
+    border: 3px solid transparent; 
+    border-radius: 8px;
+    transition: transform .3s ease, border-color .3s ease;
 }
-.thumb:hover { transform: scale(1.1); border-color: #0b5bd3; }
-#mainImage { border: 4px solid #0b5bd3; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
-
-/* Rating */
-#stars { display:flex; justify-content:center; gap:10px; }
-.star {
-  font-size: 35px; color: gray; cursor: pointer;
-  transition: transform .2s ease, color .2s ease;
+.thumb:hover { 
+    transform: scale(1.1); 
+    border-color: var(--spongebob-yellow); 
 }
-.star:hover { transform: scale(1.2); }
-body.night .star { color: #bbb; }
 
-/* Buttons */
-.btn { border-radius: 25px; font-weight: 500; transition: all .3s ease; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-.btn-primary { background: linear-gradient(135deg, #0b5bd3, #0a4eb8); border: none; }
-.btn-warning { background: linear-gradient(135deg, #ffc107, #e0a800); color: #212529; border: none; }
+body.night .thumb:hover {
+    border-color: var(--patrick-pink);
+}
+
+#mainImage { 
+    border: 4px solid var(--bikini-bottom-blue); 
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+}
+
+body.night #mainImage {
+    border: 4px solid var(--squidward-blue);
+}
+
+/* Кнопки с цветами персонажей */
+.btn { 
+    border-radius: 25px; 
+    font-weight: 500; 
+    transition: all .3s ease;
+    font-family: "Luckiest Guy", cursive;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+}
+
+.btn:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+}
+
+/* Say Hi кнопка - желтая как SpongeBob */
+#sayHiBtn {
+    background: var(--spongebob-yellow);
+    color: #333;
+    border-color: var(--spongebob-yellow);
+}
+
+#sayHiBtn:hover {
+    background: #ffed4a;
+    border-color: #ffed4a;
+}
+
+/* Toggle кнопка - синяя как Squidward */
+#themeToggle {
+    background: var(--squidward-blue);
+    color: #fff;
+    border-color: var(--squidward-blue);
+}
+
+#themeToggle:hover {
+    background: #7d9bff;
+    border-color: #7d9bff;
+}
+
+/* Read More кнопка - зеленая как Plankton */
+#readMoreBtn {
+    background: var(--plankton-green);
+    color: #fff;
+    border-color: var(--plankton-green);
+}
+
+#readMoreBtn:hover {
+    background: #37e037;
+    border-color: #37e037;
+}
+
+/* Facts кнопка - розовая как Patrick */
+#factBtn {
+    background: var(--patrick-pink);
+    color: #fff;
+    border-color: var(--patrick-pink);
+}
+
+#factBtn:hover {
+    background: #ff7fab;
+    border-color: #ff7fab;
+}
+
+/* Submit кнопка - красная как Mr. Krabs */
+.btn-primary {
+    background: var(--krabs-red);
+    color: #fff;
+    border-color: var(--krabs-red);
+}
+
+.btn-primary:hover {
+    background: #ff6666;
+    border-color: #ff6666;
+    color: #fff !important;
+}
+
+/* Reset кнопка - коричневая как Sandy */
+.btn-secondary {
+    background: var(--sandy-brown);
+    color: #fff;
+    border-color: var(--sandy-brown);
+}
+
+.btn-secondary:hover {
+    background: #da7c3a;
+    border-color: #da7c3a;
+    color: #fff;
+}
+
+/* Ночной режим для кнопок */
+body.night #sayHiBtn {
+    background: var(--patrick-pink);
+    border-color: var(--patrick-pink);
+}
+
+body.night #themeToggle {
+    background: var(--squidward-blue);
+    border-color: var(--squidward-blue);
+}
+
+body.night #readMoreBtn {
+    background: var(--plankton-green);
+    border-color: var(--plankton-green);
+}
+
+body.night #factBtn {
+    background: var(--spongebob-yellow);
+    color: #333;
+    border-color: var(--spongebob-yellow);
+}
+
+body.night .btn-primary {
+    background: var(--krabs-red);
+    border-color: var(--krabs-red);
+}
+
+body.night .btn-secondary {
+    background: var(--sandy-brown);
+    border-color: var(--sandy-brown);
+}
 
 /* Forms */
 .form-control {
-  border-radius: 8px; border: 2px solid #e9ecef;
-  transition: border-color .3s ease, box-shadow .3s ease;
+    border-radius: 8px; 
+    border: 2px solid var(--bikini-bottom-blue);
+    transition: all .3s ease;
+    background: #fff;
+    color: #333;
 }
-.form-control:focus { border-color: #0b5bd3; box-shadow: 0 0 0 .2rem rgba(11,91,211,.25); }
-#formMessage { font-weight: bold; margin-top: 10px; }
 
-/* FAQ */
-.faq-item { background:#e6f3ff; border:2px solid transparent; border-radius: 10px; cursor: pointer; }
-.faq-item + .faq-item { margin-top: .75rem; }
-.faq-item:hover { background:#d4e9ff; border-color:#0b5bd3; }
+.form-control:focus { 
+    border-color: var(--spongebob-yellow);
+    box-shadow: 0 0 0 .2rem rgba(255, 217, 15, 0.25);
+}
+
+body.night .form-control {
+    border: 2px solid var(--squidward-blue);
+    background: #666;
+    color: #f1f1f1;
+}
+
+#formMessage { 
+    font-weight: bold; 
+    margin-top: 10px; 
+}
+
+/* FAQ Styles */
+.faq-item {
+    background: var(--spongebob-yellow);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:nth-child(2) {
+    background: var(--patrick-pink);
+}
+
+.faq-item:nth-child(3) {
+    background: var(--squidward-blue);
+}
+
+.faq-question {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.faq-answer.active {
+    padding: 15px 20px;
+    max-height: 200px;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* Night mode for FAQ */
+body.night .faq-item {
+    background: var(--patrick-pink);
+}
+
+body.night .faq-item:nth-child(2) {
+    background: var(--squidward-blue);
+}
+
+body.night .faq-item:nth-child(3) {
+    background: var(--plankton-green);
+}
+
+
+/* Button hover effects */
+.button-hover {
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Additional matching elements */
+hr {
+    width: 45%;
+    margin: 20px auto 50px auto;
+    border: 1px solid var(--krusty-krab-red);
+}
+
+body.night hr {
+    border: 1px solid var(--patrick-pink);
+}
+
+span {
+    background-color: var(--spongebob-yellow);
+    padding: 6px 6px 0 6px;
+    border-radius: 4px;
+}
+
+body.night span {
+    background-color: var(--patrick-pink);
+}
 
 /* Anim utils */
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 .fade-in { animation: fadeIn .4s ease forwards; }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero { padding: 2rem 1rem !important; }
-  #stars { flex-wrap: wrap; }
+/* Responsive для контента */
+@media (max-width: 1024px) {
+    .hero { padding: 2rem 1rem !important; }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
 }
 
-
-/* Стили для hover эффектов через CSS классы */
-.button-hover {
-    background-color: #ffd700 !important;
-    color: #000 !important;
-    transform: scale(1.05) !important;
-    transition: all 0.3s ease !important;
+@media (max-width: 600px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        padding: 6px 16px;
+        font-size: 14px;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3, h4 { font-size: 1.5rem; }
 }
 
-/* Специфичные стили для разных типов кнопок */
-.btn-primary:hover {
-    background-color: #0a4eb8 !important;
+/* Убираем возможные конфликты с Bootstrap */
+.navbar {
+    display: none !important;
 }
 
-.btn-warning:hover {
-    background-color: #e0a800 !important;
+nav {
+    display: none !important;
 }
 
-.btn-info:hover {
-    background-color: #138496 !important;
-}
-
-.btn-outline-primary:hover {
-    background-color: #0b5bd3 !important;
-    color: white !important;
+/* Обеспечиваем правильный порядок загрузки */
+.main-content {
+    flex: 1;
+    width: 100%;
 }
