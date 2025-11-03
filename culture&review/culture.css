@@ -114,7 +114,6 @@ p::first-letter {
     justify-content: flex-start;
     align-items: center;
     border-radius: 25px;
-    background-color: #bbdfd1;
     padding: 5px;
     margin-top: 20px;
 }
@@ -141,7 +140,6 @@ button {
 }
 
 button:hover {
-    background-color: #bbdfd1;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transform: translateY(-5px);
     transform: scale(1.05);
@@ -154,26 +152,24 @@ button a {
 }
 
 .legacy2:hover {
-    background-color: #bbdfd1;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transform: translateY(-5px);
     transform: scale(1.05);
 }
 .legacy2 img:hover {
-    background-color: #bbdfd1;
+    
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transform: translateY(-5px);
-    transform: scale(1.60);
+    transform: scale(1.10);
 }
 .legacy2 iframe:hover {
-    background-color: #bbdfd1;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transform: translateY(-5px);
     transform: scale(1.60);
 }
 
 button:hover a {
-    color: #719870;
+    color: #60e95e;
 }
 
 ul {
@@ -406,4 +402,120 @@ code{background:#101522; padding:2px 6px; border-radius:6px; border:1px solid #2
   .text-snippet {
     font-size: 10px;
   }
+}
+
+#themeToggle {
+    background-color: #0f172a;
+    color: #ffffff;
+    width: 40%;
+    min-width: 150px;
+    margin-left: 15%;
+}
+
+#themeToggle:hover {
+    background-color: #13254f;
+    color: #fff;
+}
+
+
+
+/* Базовые переменные (светлая тема по умолчанию) */
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;        /* очень тёмный синий-чёрный для хорошего контраста */
+  --muted: #475569;
+  --card: #f8fafc;
+  --border: #e2e8f0;
+  --link: #2563eb;
+  --btn-bg: #ffffff;
+  --btn-text: #0f172a;
+  --legacy2: #bbdfd1;
+  --headfoot: #f0e68c;
+}
+
+:root .button:hover {
+    background: var(--btn-bg)
+}
+
+/* Тёмная тема — активируется data-theme="dark" на <html> */
+:root[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --muted: #9aa4b2;
+  --card: #111827;
+  --border: #1f2937;
+  --link: #60a5fa;
+  --btn-bg: #1f2937;
+  --btn-text: #e5e7eb;
+  --legacy2: #0027ea;
+  --headfoot: #121d37;
+}
+
+:root[data-theme="dark"] .button:hover {
+    background: var(--link);
+}
+
+/* Применяем переменные */
+html, body, #themeToggle {
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+    color: var(--text);
+}
+
+.legacy2, .legacy2 button {
+    background: var(--legacy2);
+}
+
+header, footer {
+    background-color: var(--headfoot);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+/* Примеры для блоков: */
+.cards, .culture-card, .legacy2, .sb-card, .fl-card, .fanlab, .acc-item, .acc-trigger, .text-snippet{
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/*
+
+.legacy2{
+  color: var(--card);
+  text-decoration: none;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+
+
+.legacy2:hover{
+  --card: #93c5fd;             
+  text-decoration: underline;
+}
+
+*/
+:root[data-theme="dark"] .legacy2:hover{
+  --card: #2079ff;                  
+}
+
+
+/* Ссылки и кнопки */
+a { color: var(--link); }
+
+.btn, button {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .5rem .75rem;
+  cursor: pointer;
+}
+
+/* При фокусе — видимая обводка */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
 }
