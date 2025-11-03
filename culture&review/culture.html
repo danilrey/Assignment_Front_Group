@@ -6,7 +6,16 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="culture.css">
 
-
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = saved || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
 </head>
 <body>
     <header>
@@ -27,8 +36,8 @@
 
         <hr>
         
-        
-
+      
+      <button id="themeToggle" class="btn" aria-pressed="false">Switch Day/Night</button>
         <div class="container">
             <div class="legacy2">
                 <h3>Wax sculpture</h3>
@@ -123,11 +132,12 @@
         </div>
       </div>
 
-
+<!--
       <div class="date"> </div>
       <div class="soundbox">
         <button id="playSoundBtn" class="btn-like">Play sound</button>
       </div>
+-->
       <div class="clipboard">
         <h2>Copy a link for this Website</h2>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -138,27 +148,26 @@
             Copy
           </button>
         </div>
-
+<!--
         <div class="copy-box">
           <p class="text-snippet" id="snippet2">Today your lucky number is: 15</p>
           <button class="copy-btn" data-target="#snippet2">
             Copy
           </button>
         </div>
+-->
       </div>
+
 
       <div id="tooltip" class="hidden">Copied to clipboard!</div>
 
       <div class="gallery">
-        <img class="lazy" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgekflpSCuBchHXGpdVpfL2MUUZ4pCKqWwJA&s" alt="Image 1" />
+        <img class="lazy" data-src="https://static0.moviewebimages.com/wordpress/wp-content/uploads/article/G8gB5gNmHR6rDHvx70txYkytJxigu3.jpg" alt="Image 1" />
         <img class="lazy" data-src="https://www.sideshow.com/cdn-cgi/image/height=850,quality=90,f=auto/https://www.sideshow.com/storage/product-images/914296/hot-toys-spongebob-squarepants-spongebob-cosbaby-collectible-figure-gallery-67ddb0462226d.jpg" alt="Image 2" />
         <img class="lazy" data-src="https://i.pinimg.com/736x/37/17/c7/3717c7b3df5dca58e643c1989f40badc.jpg" alt="Image 3" />
         <img class="lazy" data-src="https://media.printler.com/media/photo/149968.jpg?rmode=crop&width=638&height=900" alt="Image 4" />
         <img class="lazy" data-src="https://s.yimg.com/ny/api/res/1.2/3oWHH.f09QXComYnOLSHEw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD05MzI7Y2Y9d2VicA--/https://s.yimg.com/os/creatr-uploaded-images/2024-08/608883c0-5587-11ef-bd9f-5ebc1c086443" alt="Image 5" />
       </div>
-
-        <p id="text">Text</p>
-        <button id="hideBtn">Hide Text</button>
 
  
     
