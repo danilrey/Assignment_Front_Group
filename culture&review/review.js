@@ -222,7 +222,7 @@ $(document).ready(function() {
         $(this).css("opacity", "0");
       });
     }, 3000);
-  }
+  } 
 
   $("#addToCart").click(function() {
     showNotification("🛒 Link is copied!");
