@@ -499,7 +499,7 @@ header, footer {
 */
 :root[data-theme="dark"] .legacy2:hover{
   --card: #2079ff;                  
-}
+} 
 
 
 /* Ссылки и кнопки */
