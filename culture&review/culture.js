@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 (function () {
   const btn = document.getElementById('themeToggle');
-  if (!btn) return;
+  if (!btn) return; 
 
   const apply = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
