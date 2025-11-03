@@ -9,35 +9,6 @@
 }
 
 
-.stars {
-  display: inline-flex;
-  gap: 10px;
-  font-size: 32px;
-  user-select: none;
-  cursor: pointer;
-  margin: 12px 0;
-}
-.star {
-  color: #d3d3d3;               /* серые по умолчанию */
-  transition: transform .15s ease, color .15s ease;
-}
-.star:hover {
-  transform: scale(1.15);
-}
-.star.active,
-.star.active ~ .star {           /* отключим “волшебство” у соседа — см. JS */
-  /* этот селектор не нужен для закраски справа-налево, всё делаем в JS */
-}
-.star.filled {
-  color: #ffc107;               /* “золото” для выбранных */
-}
-
-/* мелкие тексты под рейтингом */
-.rating-output {
-  margin-top: 8px;
-  font-weight: 700;
-}
-
 
 
 .card {
@@ -611,4 +582,118 @@ header a:focus{
 
 #autocomplete-list li:hover {
     background-color: #ccc;
+}
+
+
+
+.stars {
+  display: inline-flex;
+  gap: 6px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #bbb;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.star.active,
+.star.hover {
+  color: gold;
+}
+
+.rating-output {
+  font-size: 16px;
+  margin-top: 4px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* === FINAL FIX for invisible stars === */
+
+/* убираем перекрытие figcaption поверх звёзд */
+.tile {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+.tile figcaption {
+  position: static !important; /* раньше был absolute — перекрывал */
+  background: none !important;
+  color: #111 !important;
+  margin-top: 8px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.stars {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 6px !important;
+  font-size: 26px ;
+  gap: 5px !important;
+  color: #ccc !important;
+  cursor: pointer !important;
+  z-index: 100 !important;
+}
+
+.star.active,
+.star.hover {
+  color: gold !important;
+}
+
+.rating-output {
+  margin-top: 4px !important;
+  text-align: center !important;
+  font-size: 15px;
+  color: #333 !important;
+}
+
+/* убираем прозрачный overlay на hover */
+.tile:hover figcaption {
+  opacity: 1 !important;
+  background: none !important;
+}
+
+
+/* === RESPONSIVE FIX for gallery === */
+
+/* Базовая сетка — три карточки в ряд */
+.gallery {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  gap: 20px !important;
+  justify-content: center !important;
+  align-items: start !important;
+  margin: 0 auto !important;
+  max-width: 1200px !important;
+  padding: 10px !important;
+}
+
+/* На средних экранах — 2 карточки */
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* На телефонах — по 1 карточке */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .tile img {
+    max-width: 90% !important;
+  }
+}
+
+/* === FONT FIX to match site style === */
+body {
+  font-family: "Luckiest Guy", Arial, sans-serif !important;
+  font-style: normal !important;
 }
