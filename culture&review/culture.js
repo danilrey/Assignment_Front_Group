@@ -196,7 +196,7 @@ $(document).ready(function() {
     localStorage.setItem('theme', theme);
     // Обновим текст и ARIA
     const isDark = theme === 'dark';
-    btn.textContent = isDark ? '🌙 Night (переключить)' : '🌞 Day (переключить)';
+    btn.textContent = isDark ? 'Night' : 'Day';
     btn.setAttribute('aria-pressed', String(isDark));
   };
 
