@@ -1,25 +1,21 @@
-const colors = ['#f0e68c', '#add8e6', '#90ee90', '#ffb6c1', '#ffa07a', '#c8c8ff'];
-const colorsNight = ['#bfb66a', '#7cadbc', '#61b861', '#c88189', '#c57757', '#8a8abf'];
-let currentIndex = localStorage.getItem('colorIndex') || 0;
 const emailInput = $("input[type='email']")
 const submitBtn = $(".submit-btn")
 const textarea = $("textarea")
 
 $(document).ready(function() {
-    const savedTheme = localStorage.getItem('isNight') === 'true'
-    applyTheme(savedTheme)
+    //pop-up window
+    const closeBtn = $(".pop-up-close")
+    const popUpAllow = $(".pop-up-btn-allow")
+    const popUpDeny = $(".pop-up-btn-deny")
+    const popUp = $(".pop-up")
+    popUp.hide()
+    loadGifs();
+    updateSubmitState();
+
 
     //prevent form from submitting
     $("form").submit(function(event) {
         event.preventDefault();
-    })
-
-    //night toggler
-    const logoImg = $("header img")
-    const body = $("body")
-    $("#theme-toggle").click(function () {
-        const isNight = body.hasClass("night")
-        applyTheme(!isNight)
     })
 
     //form validation
@@ -30,15 +26,6 @@ $(document).ready(function() {
     textarea.on("input", function() {
         updateSubmitState();
     });
-
-    updateSubmitState();
-
-    //pop-up window
-    const closeBtn = $(".pop-up-close")
-    const popUpAllow = $(".pop-up-btn-allow")
-    const popUpDeny = $(".pop-up-btn-deny")
-    const popUp = $(".pop-up")
-    popUp.hide()
 
     //submit spinner
     submitBtn.click(function () {
@@ -83,15 +70,6 @@ $(document).ready(function() {
         }, 2000)
     })
 
-    //changing background color
-    $('header').css('background-color', savedTheme ? colorsNight[currentIndex] : colors[currentIndex])
-    logoImg.click(function() {
-        currentIndex = (currentIndex + 1) % colors.length;
-        localStorage.setItem('colorIndex', currentIndex)
-        const isNight = body.hasClass("night")
-        applyTheme(isNight)
-    })
-
     //hide text or read more
     $('span').each(function() {
         $(this).click(function() {
@@ -126,6 +104,7 @@ $(document).ready(function() {
         case '6': index = 5; break;
         case '7': index = 6; break;
         case '8': index = 7; break;
+        case '9': index = 8; break;
         default: return;
     }
     const links = $('header a')
@@ -153,15 +132,6 @@ async function toggleAudio() {
     } catch (e) {console.log('Error playing audio:', e)}
 }
 
-function applyTheme(isNight) {
-    localStorage.setItem('isNight', isNight)
-    $('body').toggleClass('night', isNight)
-    $('#theme-toggle').text(isNight ? '☀️' : '🌙')
-    const basePath = window.location.hostname.includes('github.io') ? '/Assignment_Front_Group' : '..'
-    $('header img').attr('src', isNight ? `${basePath}/assets/gary.png` : `${basePath}/assets/sponge_bob.png`)
-    $('header').css('background-color', isNight ? colorsNight[currentIndex] : colors[currentIndex])
-}
-
 function updateSubmitState() {
     const emailValid = isValidOrEmpty(emailInput, validateEmail);
     const textValid = isValidOrEmpty(textarea, v => v.length >= 5);
@@ -177,4 +147,64 @@ function isValidOrEmpty($el, validator) {
     const required = $el.prop('required') || $el.attr('data-required') === 'true';
     if (!val) return !required;
     return validator ? validator(val) : true;
+}
+
+async function loadGifs() {
+    const API_KEY = 'AIzaSyCQaEFcAOchzzxGrgsLhXl1ruFGVpbWCAo';
+    const tag = 'spongebob';
+
+    async function fetchGif() {
+        try {
+            const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(tag)}&key=${API_KEY}&client_key=my_test_app&limit=8`;
+            const r = await fetch(url);
+            if (!r.ok) return null;
+            const j = await r.json();
+
+            const results = j.results || j || [];
+            if (!Array.isArray(results) || results.length === 0) return null;
+
+            const item = results[Math.floor(Math.random() * results.length)];
+            if (!item) return null;
+
+            const media = item.media_formats || item.media;
+            let gifUrl = null;
+            if (media) {
+                if (media.gif && media.gif.url) gifUrl = media.gif.url;
+                else if (media.tinygif && media.tinygif.url) gifUrl = media.tinygif.url;
+                else if (Array.isArray(media) && media[0]) {
+                    const m0 = media[0];
+                    if (m0.gif && m0.gif.url) gifUrl = m0.gif.url;
+                    else if (m0.tinygif && m0.tinygif.url) gifUrl = m0.tinygif.url;
+                }
+            }
+
+            if (!gifUrl && item.url) gifUrl = item.url;
+            if (!gifUrl && item.image) gifUrl = item.image;
+
+            return gifUrl || null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    const $cards = $('.card');
+    if (!$cards.length) return;
+
+    for (let i = 0; i < $cards.length; i++) {
+        const $card = $($cards[i]);
+        let gifUrl = await fetchGif();
+        if (!gifUrl) {
+            continue;
+        }
+
+        const $primary = $card.find('.card-img').first();
+        if ($primary.length) {
+            try {
+                $primary.attr('src', gifUrl);
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+        }
+    }
 }
