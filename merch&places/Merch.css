@@ -697,3 +697,149 @@ body {
   font-family: "Luckiest Guy", Arial, sans-serif !important;
   font-style: normal !important;
 }
+
+
+
+body.night .merch-section,
+body.night .merch-section * {
+  color: #000 !important;
+}
+
+/* === FINAL RESPONSIVE FIX FOR MOBILE === */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    max-width: 100% !important;
+    padding: 0 12px !important;
+  }
+
+  .tile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .tile img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    border-radius: 10px !important;
+  }
+
+  .rating-output, .stars {
+    font-size: 22px !important;
+  }
+
+  /* чтобы текст не выходил за рамку */
+  figcaption {
+    word-wrap: break-word !important;
+  }
+}
+
+/* === FINAL MOBILE FIX (put at the very end) === */
+.gallery {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  gap: 16px !important;
+  justify-content: center !important;
+  align-items: start !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 8px 12px !important;
+  margin: 0 auto !important;
+}
+
+/* remove any fixed tile sizing on mobile */
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr !important; }
+
+  .tile {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: auto !important; /* если квадрат ломает вью — отключаем */
+  }
+
+  .tile img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+}
+
+/* страховка против утечек ширины */
+img, video { max-width: 100% !important; height: auto !important; }
+
+/* === SpongeBob GIF Styling === */
+.sponge-gif {
+  width: 240px;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.sponge-gif:hover {
+  transform: scale(1.1);
+}
+
+/* На телефонах — меньше */
+@media (max-width: 600px) {
+  .sponge-gif {
+    width: 160px;
+  }
+}
+
+/* === FIX: Small consistent header SpongeBob logo === */
+header img[alt="Spongebob"] {
+  height: 85px !important;   /* фиксируем небольшую высоту */
+  width: auto !important;    /* сохраняем пропорции */
+  max-width: 100px !important; 
+  object-fit: contain !important;
+  display: inline-block !important;
+  margin: 4px 0 !important;
+}
+
+/* адаптация под мобильный экран */
+@media (max-width: 600px) {
+  header img[alt="Spongebob"] {
+    height: 45px !important;
+    max-width: 80px !important;
+  }
+}
+
+/* === ULTRA FIX: keep all Merch text black in night mode === */
+body.night .merch-section,
+body.night .merch-section * {
+  color: #000 !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  border-color: #444 !important;
+}
+
+/* Дополнительно для элементов, у которых мог прописан цвет отдельно */
+body.night .merch-section h1,
+body.night .merch-section h2,
+body.night .merch-section h3,
+body.night .merch-section h4,
+body.night .merch-section p,
+body.night .merch-section a,
+body.night .merch-section li,
+body.night .merch-section span,
+body.night .merch-section figcaption,
+body.night .merch-section .rating-output,
+body.night .merch-section .accordion-title,
+body.night .merch-section .accordion-content {
+  color: #000 !important;
+  background: none !important;
+}
+
+/* Если где-то фон стал серым — возвращаем белый */
+body.night .merch-section section,
+body.night .merch-section .tile,
+body.night .merch-section form,
+body.night .merch-section .banner,
+body.night .merch-section .products {
+  background-color: #fff !important;
+}
