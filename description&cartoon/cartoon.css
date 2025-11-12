@@ -25,7 +25,6 @@ body.night {
     font-weight: 400;
     font-style: normal;
 }
-
 /* HEADER - ЖЕЛТЫЙ ФОН #f0e68c (ПРЕЖНИЙ) */
 header {
     padding: 6px;
@@ -61,7 +60,6 @@ header a {
     border: none !important;
     background: transparent !important;
 }
-
 body.night header a {
     color: #f1f1f1 !important;
 }
@@ -89,7 +87,6 @@ header img:hover {
     cursor: pointer;
     transform: rotate(45deg);
 }
-
 #theme-toggle {
     background: none !important;
     border: none !important;
@@ -117,7 +114,6 @@ body.night footer {
     background: #bfb66a;
     color: #D3D3D3;
 }
-
 /* PROGRESS BAR - ПРЕЖНИЙ */
 .progress-wrap {
     position: fixed;
@@ -155,9 +151,7 @@ body.night .progress-bar {
 
     header img {
         height: 64px;
-    }
-
-    header a {
+    } header a {
         padding: 12px !important;
         font-size: 16px !important;
         border-radius: 16px;
@@ -186,8 +180,7 @@ body.night .progress-bar {
     body {
         align-items: stretch;
     }
-
-    header {
+     header {
         align-items: center;
         gap: 8px;
         padding: 8px;
@@ -224,8 +217,7 @@ body.night .progress-bar {
     .progress-wrap {
         height: 4px;
     }
-
-    header a,
+        header a,
     #theme-toggle {
         line-height: 1;
     }
@@ -296,7 +288,6 @@ body.night .carousel-caption {
     transition: all 0.3s ease;
     background: #fff8dc; /* Светло-желтый как песок */
 }
-
 .card:hover { 
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(135, 206, 235, 0.5); 
@@ -518,7 +509,6 @@ body.night #favorite {
     border-color: var(--plankton-green);
     color: #fff;
 }
-
 .mini-nav .btn:hover {
     transform: translateY(-3px);
     filter: brightness(1.1);

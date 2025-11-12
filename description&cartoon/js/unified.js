@@ -36,7 +36,6 @@ function initializeAllFeatures() {
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleBtn = document.getElementById('themeToggle');
-    
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
             document.body.classList.toggle('night');
@@ -71,7 +70,6 @@ function initReadMore() {
         }
     });
 }
-
 function initGallery() {
     const thumbs = document.querySelectorAll('.thumb');
     const mainImage = document.getElementById('mainImage');
@@ -104,7 +102,6 @@ function initFacts() {
         "Mr. Krabs' first name is Eugene.",
         "Sandy Cheeks is from Texas and is a squirrel scientist."
     ];
-    
     factBtn.addEventListener('click', function() {
         const randomFact = facts[Math.floor(Math.random() * facts.length)];
         factArea.textContent = randomFact;
@@ -137,7 +134,6 @@ function initForm() {
         formMessage.textContent = '';
     });
 }
-
 function initSayHi() {
     const sayHiBtn = document.getElementById('sayHiBtn');
     const nameInput = document.getElementById('nameInput');
@@ -204,7 +200,6 @@ function initCartoonFeatures() {
     
     // Time greeting
     timeGreeting();
-    
     // Smooth scroll for mini-nav
     smoothMiniNav();
 }
@@ -271,8 +266,7 @@ function initDynamicQuotes() {
     btnWrap.innerHTML = `<button id="update-quotes" class="btn btn-warning btn-lg">🎭 Change Character Quotes</button>`;
     const intro = document.getElementById("intro");
     if (intro) intro.insertAdjacentElement("afterend", btnWrap);
-
-    const quotes = {
+const quotes = {
         spongebob: ["I'm ready! I'm ready!", "The best time to wear a striped sweater is all the time!"],
         patrick: ["Is mayonnaise an instrument?", "The inner machinations of my mind are an enigma."],
         squidward: ["Another day, another migraine.", "I hate everyone equally."]
@@ -308,7 +302,6 @@ function initTimeButton() {
             `📅 ${now.toLocaleDateString()}<br>🕒 ${now.toLocaleTimeString()}`;
     });
 }
-
 function initKeyboardNav() {
     const cards = Array.from(document.querySelectorAll(".character-card"));
     if (!cards.length) return;
@@ -344,7 +337,6 @@ function initFavoriteForm() {
         e.preventDefault();
         const selected = form.querySelector('input[name="favorite"]:checked');
         const why = document.getElementById("why").value.trim();
-        
         if (!selected) {
             alert("Please select a favorite character.");
             return;
@@ -374,7 +366,6 @@ function timeGreeting() {
     const introP = document.querySelector("#intro p");
     if (introP) introP.innerHTML = `<strong>${text}</strong><br>${introP.innerHTML}`;
 }
-
 function smoothMiniNav() {
     const links = document.querySelectorAll('.mini-nav a[href^="#"]');
     links.forEach(a => a.addEventListener('click', (e) => {
@@ -447,7 +438,6 @@ function initSearchHighlighting() {
         } else {
             $('#searchResults').html(`<span class="text-danger">✗ No matches found for "${searchTerm}"</span>`);
         }
-        
         currentHighlight = searchTerm;
     }
 
@@ -519,8 +509,7 @@ function initScrollProgressBar() {
         $progressBar.css('width', roundedProgress + '%');
         updateProgressColor(roundedProgress);
     });
-    
-    function updateProgressColor(progress) {
+     function updateProgressColor(progress) {
         let gradient;
         if (progress < 25) {
             gradient = 'linear-gradient(90deg, #ff6b6b, #ffd93d)';
