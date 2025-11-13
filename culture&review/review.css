@@ -5,6 +5,7 @@
     grid-template-areas:              
     "header  header"
     "sidebar content"
+    "content2 content2"
     "footer  footer";
     min-height:100dvh;
     grid-gap:16px;
@@ -130,6 +131,7 @@ header {
     align-items: center;
 }
 .content{ grid-area:content; }
+.content2{ grid-area:content2; }
 .footer{  grid-area:footer; }
 
 .gallery{
@@ -440,4 +442,201 @@ button:hover {
 
 .container {
   text-align: center;
+}
+
+
+.content2 {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.content3 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 50px;
+}
+
+.content2 .card {
+    width: 90%;
+}
+
+
+@media (max-width: 600px) {
+    .input_box {
+        width: 80%;
+    }
+
+    .layout {
+    display:grid;                    
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:              
+    "header"
+    "sidebar"
+    "content"
+    "content2"
+    "footer";
+    min-height:100dvh;
+    grid-gap:16px;
+}
+
+}
+
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 1024px) {
+    .card-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        padding: 20px clamp(12px, 5vw, 60px);
+    }
+    form {
+        width: calc(100% - 48px);
+        max-width: 720px;
+        height: auto;
+        padding: 20px;
+        margin: 32px auto;
+        border-radius: 18px;
+        box-sizing: border-box;
+        grid-template-rows: auto auto 1fr auto;
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    .form-title {
+        font-size: 22px;
+        margin-top: 18px;
+    }
+
+    .email-form input,
+    .feedback-form textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .email-form input {
+        height: 36px;
+        font-size: 16px;
+        padding: 6px 8px;
+    }
+
+    .feedback-form textarea {
+        height: 120px;
+        min-height: 100px;
+        resize: none;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .submit-btn,
+    .pop-up-btn-allow,
+    .pop-up-btn-deny {
+        width: auto;
+        min-width: 120px;
+        padding: 0 14px;
+        margin-bottom: 24px;
+    }
+
+    .pop-up {
+        width: calc(100% - 80px);
+        max-width: 640px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 18px;
+    }
+
+    .pop-up-close {
+        top: 10px;
+        right: 10px;
+        padding: 5px 7px;
+        font-size: 22px;
+    }
+
+    .card-container {
+        padding: 20px clamp(12px, 5vw, 60px);
+    }
+
+    .facts,
+    .citation {
+        max-width: 80%;
+        font-size: 18px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+    
+    form {
+        width: calc(100% - 32px);
+        max-width: 480px;
+        height: auto;
+        padding: 16px;
+        margin: 24px auto 48px;
+        border-radius: 16px;
+        box-sizing: border-box;
+        grid-template-rows: auto auto auto auto;
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    .email-form input,
+    .feedback-form textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .feedback-form textarea {
+        height: 100px;
+        min-height: 80px;
+        resize: none;
+    }
+
+    .submit-btn,
+    .pop-up-btn-allow,
+    .pop-up-btn-deny {
+        width: auto;
+        min-width: 110px;
+        padding: 0 12px;
+        margin-bottom: 16px;
+    }
+
+    .pop-up {
+        width: calc(100% - 40px);
+        max-width: 560px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 14px;
+    }
+
+    .pop-up-close {
+        top: 8px;
+        right: 8px;
+        padding: 4px 6px;
+        font-size: 20px;
+    }
+
+    .main-content,
+    .card-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
