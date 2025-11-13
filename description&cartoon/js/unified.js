@@ -1,89 +1,317 @@
-// ===== MAIN INITIALIZATION FUNCTION =====
-function initializeAllFeatures() {
-    console.log("🚀 Initializing all SpongeBob features");
+// ===== DESCRIPTION PAGE FUNCTIONALITY =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔄 Initializing Description Page Features...');
     
-    // Initialize core features for both pages
-    initThemeToggle();
-    
-    // Check which page we're on and initialize specific features
-    if (document.getElementById('readMoreBtn')) {
-        // Description page features
-        initReadMore();
-        initGallery();
-        initFacts();
-        initForm();
-        initSayHi();
-        initAccordion();
-        console.log("📄 Description page features initialized");
+    // Check if we're on the description page
+    if (document.body.classList.contains('page-description')) {
+        initDescriptionFeatures();
     }
+});
+
+function initDescriptionFeatures() {
+    console.log('✅ Initializing Description Page specific features');
     
-    if (document.querySelector('.character-card')) {
-        // Cartoon page features
-        initCartoonFeatures();
-        console.log("🎬 Cartoon page features initialized");
-    }
+    // Initialize all description page features
+    initReadMore();
+    initGallery();
+    initFacts();
+    initForm();
+    initSayHi();
+    initAccordion();
+    initStatsCounter();
+    initVoiceGreeting();
+    initConfetti();
+    initEpisodes();
+    initGifsFeatures();
+    initSearchHighlighting();
+    initScrollProgressBar();
     
-    // Initialize jQuery features if available
-    if (typeof $ !== 'undefined') {
-        initSearchHighlighting();
-        initScrollProgressBar();
-    }
-    
-    console.log("🎉 All features initialized successfully!");
+    console.log('✅ All Description Page features initialized');
 }
 
-// ===== THEME TOGGLE =====
-function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeToggleBtn = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('night');
-            console.log(`🌙 Theme changed to: ${document.body.classList.contains('night') ? 'Night' : 'Day'}`);
-        });
-    }
-    
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', function() {
-            document.body.classList.toggle('night');
-            console.log(`🌙 Theme changed to: ${document.body.classList.contains('night') ? 'Night' : 'Day'}`);
-        });
-    }
-}
-
-// ===== DESCRIPTION PAGE FEATURES =====
+// ===== READ MORE FUNCTION =====
 function initReadMore() {
     const readMoreBtn = document.getElementById('readMoreBtn');
     const hiddenText = document.getElementById('hiddenText');
     
-    if (!readMoreBtn || !hiddenText) return;
+    if (!readMoreBtn || !hiddenText) {
+        console.log('❌ Read More elements not found');
+        return;
+    }
+    
+    console.log('✅ Read More elements found');
     
     readMoreBtn.addEventListener('click', function() {
+        console.log('📖 Read More button clicked');
         const isVisible = hiddenText.style.display === 'block';
         
         if (isVisible) {
             hiddenText.style.display = 'none';
             readMoreBtn.textContent = 'Read More';
+            readMoreBtn.classList.remove('btn-secondary');
+            readMoreBtn.classList.add('btn-primary');
         } else {
             hiddenText.style.display = 'block';
             readMoreBtn.textContent = 'Read Less';
+            readMoreBtn.classList.remove('btn-primary');
+            readMoreBtn.classList.add('btn-secondary');
         }
     });
 }
-function initGallery() {
-    const thumbs = document.querySelectorAll('.thumb');
-    const mainImage = document.getElementById('mainImage');
+
+// ===== FAQ ACCORDION =====
+function initAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item-improved');
     
-    if (!thumbs.length || !mainImage) return;
+    if (faqItems.length === 0) {
+        console.log('❌ FAQ items not found');
+        return;
+    }
     
-    thumbs.forEach(thumb => {
-        thumb.addEventListener('click', function() {
-            mainImage.src = this.src;
-            mainImage.alt = this.alt;
+    console.log(`✅ Found ${faqItems.length} FAQ items`);
+    
+    faqItems.forEach((item, index) => {
+        const question = item.querySelector('.faq-question-improved');
+        const answer = item.querySelector('.faq-answer-improved');
+        const toggle = item.querySelector('.faq-toggle');
+        
+        if (!question || !answer || !toggle) {
+            console.log(`❌ FAQ item ${index} missing elements`);
+            return;
+        }
+        
+        // Set initial state
+        answer.style.maxHeight = '0';
+        answer.style.padding = '0 20px';
+        
+        question.addEventListener('click', () => {
+            console.log(`📋 FAQ item ${index} clicked`);
+            
+            const isActive = answer.style.maxHeight !== '0px';
+            
+            // Close all items first
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherAnswer = otherItem.querySelector('.faq-answer-improved');
+                    const otherToggle = otherItem.querySelector('.faq-toggle');
+                    if (otherAnswer) {
+                        otherAnswer.style.maxHeight = '0';
+                        otherAnswer.style.padding = '0 20px';
+                    }
+                    if (otherToggle) otherToggle.textContent = '➕';
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                answer.style.maxHeight = '0';
+                answer.style.padding = '0 20px';
+                toggle.textContent = '➕';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.style.padding = '0 20px 15px 20px';
+                toggle.textContent = '➖';
+            }
         });
     });
 }
 
+// ===== GALLERY SLIDER =====
+function initGallery() {
+    const gallerySlider = document.getElementById('gallerySlider');
+    const galleryNav = document.getElementById('galleryNav');
+    const prevBtn = document.querySelector('.gallery-btn.prev');
+    const nextBtn = document.querySelector('.gallery-btn.next');
+    
+    if (!gallerySlider || !galleryNav) return;
+    
+    const slides = gallerySlider.querySelectorAll('.gallery-slide');
+    const dots = galleryNav.querySelectorAll('.gallery-dot');
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+        slides.forEach(slide => slide.style.display = 'none');
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].style.display = 'block';
+        dots[index].classList.add('active');
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        let nextIndex = currentSlide + 1;
+        if (nextIndex >= slides.length) nextIndex = 0;
+        showSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        let prevIndex = currentSlide - 1;
+        if (prevIndex < 0) prevIndex = slides.length - 1;
+        sh// ===== DESCRIPTION PAGE FUNCTIONALITY =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔄 Initializing Description Page Features...');
+    
+    // Check if we're on the description page
+    if (document.body.classList.contains('page-description')) {
+        initDescriptionFeatures();
+    }
+});
+
+function initDescriptionFeatures() {
+    console.log('✅ Initializing Description Page specific features');
+    
+    // Initialize all description page features
+    initReadMore();
+    initGallery();
+    initFacts();
+    initForm();
+    initSayHi();
+    initAccordion();
+    initStatsCounter();
+    initVoiceGreeting();
+    initConfetti();
+    initEpisodes();
+    initGifsFeatures();
+    initSearchHighlighting();
+    initScrollProgressBar();
+    
+    console.log('✅ All Description Page features initialized');
+}
+
+// ===== READ MORE FUNCTION =====
+function initReadMore() {
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const hiddenText = document.getElementById('hiddenText');
+    
+    if (!readMoreBtn || !hiddenText) {
+        console.log('❌ Read More elements not found');
+        return;
+    }
+    
+    console.log('✅ Read More elements found');
+    
+    readMoreBtn.addEventListener('click', function() {
+        console.log('📖 Read More button clicked');
+        const isVisible = hiddenText.style.display === 'block';
+        
+        if (isVisible) {
+            hiddenText.style.display = 'none';
+            readMoreBtn.textContent = 'Read More';
+            readMoreBtn.classList.remove('btn-secondary');
+            readMoreBtn.classList.add('btn-primary');
+        } else {
+            hiddenText.style.display = 'block';
+            readMoreBtn.textContent = 'Read Less';
+            readMoreBtn.classList.remove('btn-primary');
+            readMoreBtn.classList.add('btn-secondary');
+        }
+    });
+}
+
+// ===== FAQ ACCORDION =====
+function initAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item-improved');
+    
+    if (faqItems.length === 0) {
+        console.log('❌ FAQ items not found');
+        return;
+    }
+    
+    console.log(`✅ Found ${faqItems.length} FAQ items`);
+    
+    faqItems.forEach((item, index) => {
+        const question = item.querySelector('.faq-question-improved');
+        const answer = item.querySelector('.faq-answer-improved');
+        const toggle = item.querySelector('.faq-toggle');
+        
+        if (!question || !answer || !toggle) {
+            console.log(`❌ FAQ item ${index} missing elements`);
+            return;
+        }
+        
+        // Set initial state
+        answer.style.maxHeight = '0';
+        answer.style.padding = '0 20px';
+        
+        question.addEventListener('click', () => {
+            console.log(`📋 FAQ item ${index} clicked`);
+            
+            const isActive = answer.style.maxHeight !== '0px';
+            
+            // Close all items first
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherAnswer = otherItem.querySelector('.faq-answer-improved');
+                    const otherToggle = otherItem.querySelector('.faq-toggle');
+                    if (otherAnswer) {
+                        otherAnswer.style.maxHeight = '0';
+                        otherAnswer.style.padding = '0 20px';
+                    }
+                    if (otherToggle) otherToggle.textContent = '➕';
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                answer.style.maxHeight = '0';
+                answer.style.padding = '0 20px';
+                toggle.textContent = '➕';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.style.padding = '0 20px 15px 20px';
+                toggle.textContent = '➖';
+            }
+        });
+    });
+}
+
+// ===== GALLERY SLIDER =====
+function initGallery() {
+    const gallerySlider = document.getElementById('gallerySlider');
+    const galleryNav = document.getElementById('galleryNav');
+    const prevBtn = document.querySelector('.gallery-btn.prev');
+    const nextBtn = document.querySelector('.gallery-btn.next');
+    
+    if (!gallerySlider || !galleryNav) return;
+    
+    const slides = gallerySlider.querySelectorAll('.gallery-slide');
+    const dots = galleryNav.querySelectorAll('.gallery-dot');
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+        slides.forEach(slide => slide.style.display = 'none');
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].style.display = 'block';
+        dots[index].classList.add('active');
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        let nextIndex = currentSlide + 1;
+        if (nextIndex >= slides.length) nextIndex = 0;
+        showSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        let prevIndex = currentSlide - 1;
+        if (prevIndex < 0) prevIndex = slides.length - 1;
+        showSlide(prevIndex);
+    }
+    
+    showSlide(0);
+    
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    setInterval(nextSlide, 5000);
+}
+
+// ===== RANDOM FACTS =====
 function initFacts() {
     const factBtn = document.getElementById('factBtn');
     const factArea = document.getElementById('factArea');
@@ -102,12 +330,20 @@ function initFacts() {
         "Mr. Krabs' first name is Eugene.",
         "Sandy Cheeks is from Texas and is a squirrel scientist."
     ];
+    
     factBtn.addEventListener('click', function() {
         const randomFact = facts[Math.floor(Math.random() * facts.length)];
         factArea.textContent = randomFact;
+        
+        factArea.style.opacity = '0';
+        setTimeout(() => {
+            factArea.style.opacity = '1';
+            factArea.style.transition = 'opacity 0.5s ease';
+        }, 100);
     });
 }
 
+// ===== SUGGESTION FORM =====
 function initForm() {
     const suggestForm = document.getElementById('suggestForm');
     const resetBtn = document.getElementById('resetBtn');
@@ -119,12 +355,14 @@ function initForm() {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const episode = document.getElementById('episode').value;
+        const reason = document.getElementById('reason').value;
         
         if (name && episode) {
             formMessage.textContent = `Thanks ${name}! We'll check out "${episode}"!`;
             formMessage.style.color = 'green';
+            showToast(`Suggestion submitted for "${episode}"!`, 'success');
         } else {
-            formMessage.textContent = 'Please fill in all fields!';
+            formMessage.textContent = 'Please fill in all required fields!';
             formMessage.style.color = 'red';
         }
     });
@@ -134,6 +372,8 @@ function initForm() {
         formMessage.textContent = '';
     });
 }
+
+// ===== SAY HI FUNCTION =====
 function initSayHi() {
     const sayHiBtn = document.getElementById('sayHiBtn');
     const nameInput = document.getElementById('nameInput');
@@ -144,338 +384,353 @@ function initSayHi() {
     sayHiBtn.addEventListener('click', function() {
         const name = nameInput.value || 'Friend';
         greeting.textContent = `Ahoy, ${name}! Welcome to Bikini Bottom! 🏖️`;
+        
+        greeting.classList.add('floating');
+        setTimeout(() => {
+            greeting.classList.remove('floating');
+        }, 3000);
     });
 }
 
-function initAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
+// ===== STATS COUNTER =====
+function initStatsCounter() {
+    const statSeasons = document.getElementById('statSeasons');
+    const statEpisodes = document.getElementById('statEpisodes');
+    const statYears = document.getElementById('statYears');
+    const statLanguages = document.getElementById('statLanguages');
     
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = item.querySelector('.faq-icon');
-        
-        question.addEventListener('click', () => {
-            // Close all other items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.faq-answer').classList.remove('active');
-                    otherItem.querySelector('.faq-icon').textContent = '➕';
-                }
-            });
-            
-            // Toggle current item
-            const isActive = item.classList.contains('active');
-            
-            if (isActive) {
-                item.classList.remove('active');
-                answer.classList.remove('active');
-                icon.textContent = '➕';
-            } else {
-                item.classList.add('active');
-                answer.classList.add('active');
-                icon.textContent = '➖';
+    if (!statSeasons) return;
+    
+    const stats = {
+        seasons: 13,
+        episodes: 280,
+        years: 25,
+        languages: 60
+    };
+    
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateValue(statSeasons, 0, stats.seasons, 2000);
+                animateValue(statEpisodes, 0, stats.episodes, 2000);
+                animateValue(statYears, 0, stats.years, 2000);
+                animateValue(statLanguages, 0, stats.languages, 2000);
+                observer.unobserve(entry.target);
             }
         });
     });
+    
+    observer.observe(statSeasons.parentElement);
 }
 
-// ===== CARTOON PAGE FEATURES =====
-function initCartoonFeatures() {
-    // Rating functionality
-    initRating();
+// ===== VOICE GREETING =====
+function initVoiceGreeting() {
+    const voiceBtn = document.getElementById('voiceGreeting');
+    const nameInput = document.getElementById('nameInput');
     
-    // Dynamic quotes
-    initDynamicQuotes();
+    if (!voiceBtn) return;
     
-    // Time button
-    initTimeButton();
-    
-    // Keyboard navigation
-    initKeyboardNav();
-    
-    // Favorite form
-    initFavoriteForm();
-    
-    // Time greeting
-    timeGreeting();
-    // Smooth scroll for mini-nav
-    smoothMiniNav();
-}
-
-function initRating() {
-    // Check if rating section already exists
-    if (document.getElementById('episode-rating')) return;
-    
-    const ratingHTML = `
-        <section class="card p-4 mb-4" id="episode-rating">
-            <h2 class="text-center mb-3">Rate Your Favorite Episode</h2>
-            <div class="text-center">
-                <p class="mb-2">How would you rate "<span id="episode-title">Band Geeks</span>"?</p>
-                <div class="rating-stars-container mb-2">
-                    <span class="rating-star" data-rating="1">⭐</span>
-                    <span class="rating-star" data-rating="2">⭐</span>
-                    <span class="rating-star" data-rating="3">⭐</span>
-                    <span class="rating-star" data-rating="4">⭐</span>
-                    <span class="rating-star" data-rating="5">⭐</span>
-                </div>
-                <p id="rating-feedback" class="text-muted">Click on stars to rate</p>
-                <button id="reset-rating" class="btn btn-outline-secondary btn-sm mt-2">Reset Rating</button>
-            </div>
-        </section>
-    `;
-    
-    const characters = document.getElementById("characters");
-    if (characters) characters.insertAdjacentHTML("afterend", ratingHTML);
-
-    const stars = document.querySelectorAll(".rating-star");
-    const feedback = document.getElementById("rating-feedback");
-    let current = 0;
-
-    function highlight(n) {
-        stars.forEach((s, i) => {
-            s.style.opacity = i < n ? "1" : ".6";
-            s.style.transform = i < n ? "scale(1.3)" : "scale(1)";
-        });
-    }
-
-    stars.forEach(star => {
-        star.addEventListener("mouseenter", () => highlight(+star.dataset.rating));
-        star.addEventListener("mouseleave", () => highlight(current));
-        star.addEventListener("click", () => {
-            current = +star.dataset.rating;
-            highlight(current);
-            const msgs = ["", "Poor - 1 ⭐", "Fair - 2 ⭐⭐", "Good - 3 ⭐⭐⭐", "Very Good - 4 ⭐⭐⭐⭐", "Excellent - 5 ⭐⭐⭐⭐⭐"];
-            feedback.textContent = msgs[current];
-            feedback.className = "fw-bold text-success";
-        });
-    });
-
-    document.getElementById("reset-rating")?.addEventListener("click", () => {
-        current = 0;
-        highlight(0);
-        feedback.textContent = "Click on stars to rate";
-        feedback.className = "text-muted";
-    });
-}
-
-function initDynamicQuotes() {
-    const btnWrap = document.createElement("div");
-    btnWrap.className = "text-center mb-4";
-    btnWrap.innerHTML = `<button id="update-quotes" class="btn btn-warning btn-lg">🎭 Change Character Quotes</button>`;
-    const intro = document.getElementById("intro");
-    if (intro) intro.insertAdjacentElement("afterend", btnWrap);
-const quotes = {
-        spongebob: ["I'm ready! I'm ready!", "The best time to wear a striped sweater is all the time!"],
-        patrick: ["Is mayonnaise an instrument?", "The inner machinations of my mind are an enigma."],
-        squidward: ["Another day, another migraine.", "I hate everyone equally."]
-    };
-    
-    let i = 0;
-    document.getElementById("update-quotes").addEventListener("click", () => {
-        const s = document.querySelector("#spongebob .card-text");
-        const p = document.querySelector("#patrick .card-text");
-        const q = document.querySelector("#squidward .card-text");
+    voiceBtn.addEventListener('click', function() {
+        const name = nameInput.value || 'Friend';
+        const message = `Ahoy, ${name}! Welcome to Bikini Bottom!`;
         
-        if (s) s.textContent = `"${quotes.spongebob[i % quotes.spongebob.length]}"`;
-        if (p) p.textContent = `"${quotes.patrick[i % quotes.patrick.length]}"`;
-        if (q) q.textContent = `"${quotes.squidward[i % quotes.squidward.length]}"`;
-        i++;
-    });
-}
-
-function initTimeButton() {
-    const container = document.getElementById("episode-rating");
-    if (!container) return;
-    
-    const html = `
-        <div class="text-center mb-3">
-            <button id="show-time" class="btn btn-info">🕒 Show Current Time</button>
-            <div id="time-display" class="mt-2 fw-bold text-primary"></div>
-        </div>`;
-    container.insertAdjacentHTML("afterend", html);
-    
-    document.getElementById("show-time").addEventListener("click", () => {
-        const now = new Date();
-        document.getElementById("time-display").innerHTML = 
-            `📅 ${now.toLocaleDateString()}<br>🕒 ${now.toLocaleTimeString()}`;
-    });
-}
-function initKeyboardNav() {
-    const cards = Array.from(document.querySelectorAll(".character-card"));
-    if (!cards.length) return;
-    
-    let idx = 0;
-    document.addEventListener("keydown", (e) => {
-        if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
-        e.preventDefault();
-        
-        cards.forEach(c => {
-            c.style.borderColor = "#e0e0e0";
-            c.style.transform = "translateY(0)";
-        });
-        
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-            idx = (idx + 1) % cards.length;
+        if ('speechSynthesis' in window) {
+            const speech = new SpeechSynthesisUtterance(message);
+            speech.rate = 0.9;
+            speech.pitch = 1.2;
+            window.speechSynthesis.speak(speech);
         } else {
-            idx = (idx - 1 + cards.length) % cards.length;
+            showToast('Voice synthesis not supported in your browser', 'warning');
         }
-        
-        const cur = cards[idx];
-        cur.style.borderColor = "#0b5bd3";
-        cur.style.transform = "translateY(-10px)";
-        cur.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 }
 
-function initFavoriteForm() {
-    const form = document.querySelector("#favorite form");
-    if (!form) return;
+// ===== CONFETTI EFFECT =====
+function initConfetti() {
+    const confettiBtn = document.getElementById('confettiBtn');
     
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const selected = form.querySelector('input[name="favorite"]:checked');
-        const why = document.getElementById("why").value.trim();
-        if (!selected) {
-            alert("Please select a favorite character.");
-            return;
-        }
+    if (!confettiBtn) return;
+    
+    confettiBtn.addEventListener('click', function() {
+        showToast('Celebration time! 🎉', 'success');
         
-        if (why && why.length < 5) {
-            alert("Please provide a longer reason (min 5 chars)");
-            return;
+        for (let i = 0; i < 50; i++) {
+            createConfetti();
         }
-        
-        alert(`Thanks! Favorite: ${selected.value}${why ? ". Reason: " + why : ""}`);
-        form.reset();
     });
-}
-
-function timeGreeting() {
-    const hour = new Date().getHours();
-    let text;
     
-    switch (true) {
-        case (hour >= 5 && hour < 12): text = "Good Morning! 🌞 Ready for SpongeBob?"; break;
-        case (hour >= 12 && hour < 18): text = "Good Afternoon! ☀️ Perfect time for adventures!"; break;
-        case (hour >= 18 && hour < 22): text = "Good Evening! 🌙 Time to relax with cartoons!"; break;
-        default: text = "Hello! 🌜 Late night session?";
+    function createConfetti() {
+        const confetti = document.createElement('div');
+        confetti.innerHTML = '🎉';
+        confetti.style.position = 'fixed';
+        confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-50px';
+        confetti.style.zIndex = '9999';
+        confetti.style.pointerEvents = 'none';
+        document.body.appendChild(confetti);
+        
+        const animation = confetti.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        animation.onfinish = () => confetti.remove();
     }
-    
-    const introP = document.querySelector("#intro p");
-    if (introP) introP.innerHTML = `<strong>${text}</strong><br>${introP.innerHTML}`;
-}
-function smoothMiniNav() {
-    const links = document.querySelectorAll('.mini-nav a[href^="#"]');
-    links.forEach(a => a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }));
 }
 
-// ===== JQUERY FEATURES =====
-function initSearchHighlighting() {
-    if (typeof $ === 'undefined') return;
+// ===== EPISODES LIST =====
+function initEpisodes() {
+    const episodesList = document.getElementById('episodesList');
     
-    // Only add search to description page
-    if (!document.getElementById('readMoreBtn')) return;
+    if (!episodesList) return;
     
-    const searchHTML = `
-        <div class="card p-3 mb-4 search-container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h4 class="mb-2">🔍 Search Content</h4>
-                    <p class="text-muted small mb-0">Highlight matching words on this page</p>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Enter keyword to highlight...">
-                        <button id="searchBtn" class="btn btn-primary">Search</button>
-                        <button id="clearSearch" class="btn btn-outline-secondary">Clear</button>
+    const episodes = [
+        {
+            title: "Band Geeks",
+            season: "Season 2",
+            description: "Squidward tries to form a band for the Bubble Bowl."
+        },
+        {
+            title: "Chocolate with Nuts",
+            season: "Season 3", 
+            description: "SpongeBob and Patrick become chocolate bar salesmen."
+        },
+        {
+            title: "Pizza Delivery",
+            season: "Season 1",
+            description: "SpongeBob and Squidward deliver a pizza to a remote location."
+        },
+        {
+            title: "Graveyard Shift",
+            season: "Season 2",
+            description: "SpongeBob and Squidward work the night shift at the Krusty Krab."
+        }
+    ];
+    
+    episodes.forEach(episode => {
+        const episodeHTML = `
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">${episode.title}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${episode.season}</h6>
+                        <p class="card-text">${episode.description}</p>
                     </div>
                 </div>
             </div>
-            <div id="searchResults" class="mt-2 small text-muted"></div>
-        </div>
-    `;
+        `;
+        episodesList.innerHTML += episodeHTML;
+    });
+}
+
+// ===== GIFS FEATURES =====
+function initGifsFeatures() {
+    const loadGifsBtn = document.getElementById('loadGifsBtn');
+    const toggleGifsBtn = document.getElementById('toggleGifsBtn');
     
-    $('.hero').after(searchHTML);
+    if (loadGifsBtn) {
+        loadGifsBtn.addEventListener('click', loadGifs);
+    }
+    
+    if (toggleGifsBtn) {
+        toggleGifsBtn.addEventListener('click', toggleGifs);
+    }
+    
+    setTimeout(loadGifs, 2000);
+}
+
+async function loadGifs() {
+    const API_KEY = 'AIzaSyCQaEFcAOchzzxGrgsLhXl1ruFGVpbWCAo';
+    const tag = 'spongebob';
+
+    async function fetchGif() {
+        try {
+            const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(tag)}&key=${API_KEY}&client_key=my_test_app&limit=8`;
+            const r = await fetch(url);
+            if (!r.ok) return null;
+            const j = await r.json();
+
+            const results = j.results || j || [];
+            if (!Array.isArray(results) || results.length === 0) return null;
+
+            const item = results[Math.floor(Math.random() * results.length)];
+            if (!item) return null;
+
+            const media = item.media_formats || item.media;
+            let gifUrl = null;
+            if (media) {
+                if (media.gif && media.gif.url) gifUrl = media.gif.url;
+                else if (media.tinygif && media.tinygif.url) gifUrl = media.tinygif.url;
+                else if (Array.isArray(media) && media[0]) {
+                    const m0 = media[0];
+                    if (m0.gif && m0.gif.url) gifUrl = m0.gif.url;
+                    else if (m0.tinygif && m0.tinygif.url) gifUrl = m0.tinygif.url;
+                }
+            }
+
+            if (!gifUrl && item.url) gifUrl = item.url;
+            if (!gifUrl && item.image) gifUrl = item.image;
+
+            return gifUrl || null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    const characterCards = document.querySelectorAll('.character-card');
+    if (!characterCards.length) return;
+
+    // Update indicators
+    const indicators = document.querySelectorAll('.gif-indicator');
+    indicators.forEach(indicator => {
+        indicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    });
+
+    for (let i = 0; i < characterCards.length; i++) {
+        const card = characterCards[i];
+        let gifUrl = await fetchGif();
+        if (!gifUrl) {
+            continue;
+        }
+
+        const img = card.querySelector('.character-img');
+        const indicator = card.querySelector('.gif-indicator');
+        
+        if (img) {
+            // Store original image if not already stored
+            if (!img.dataset.original) {
+                img.dataset.original = img.src;
+            }
+            
+            try {
+                img.src = gifUrl;
+                img.dataset.currentType = 'gif';
+                
+                if (indicator) {
+                    indicator.innerHTML = '<i class="fas fa-film text-success"></i> GIF Loaded';
+                }
+            } catch (e) {
+                console.log(e);
+                if (indicator) {
+                    indicator.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> Error';
+                }
+            }
+        }
+    }
+
+    console.log("✅ GIFs loaded successfully");
+}
+
+function toggleGifs() {
+    console.log("🔄 Toggling between GIFs and images");
+    
+    const characterCards = document.querySelectorAll('.character-card');
+    let hasGifs = false;
+    
+    characterCards.forEach(card => {
+        const img = card.querySelector('.character-img');
+        const indicator = card.querySelector('.gif-indicator');
+        
+        if (img && img.dataset.original) {
+            if (img.dataset.currentType === 'gif') {
+                // Switch back to original image
+                img.src = img.dataset.original;
+                img.dataset.currentType = 'image';
+                if (indicator) {
+                    indicator.innerHTML = '<i class="fas fa-image"></i> Static Image';
+                }
+            } else {
+                // Try to reload GIF
+                hasGifs = true;
+                loadGifs();
+            }
+        }
+    });
+    
+    if (!hasGifs) {
+        loadGifs();
+    }
+}
+
+// ===== SEARCH HIGHLIGHTING =====
+function initSearchHighlighting() {
+    const searchBtn = document.getElementById('searchBtn');
+    const clearSearch = document.getElementById('clearSearch');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    
+    if (!searchBtn || !searchInput) return;
     
     let currentHighlight = null;
     
-    $('#searchBtn').on('click', performSearch);
-    $('#searchInput').on('keypress', (e) => { if (e.which === 13) performSearch(); });
-    $('#clearSearch').on('click', clearHighlight);
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') performSearch(); 
+    });
+    
+    if (clearSearch) {
+        clearSearch.addEventListener('click', clearHighlight);
+    }
     
     function performSearch() {
-        const searchTerm = $('#searchInput').val().trim();
+        const searchTerm = searchInput.value.trim();
         if (!searchTerm) return;
         
         clearHighlight();
         
-        const $searchableElements = $('h1, h2, h3, h4, h5, h6, p, li, .card-text, .faq-item');
+        const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, .card-text, .faq-item-improved');
         let matchCount = 0;
         
-        $searchableElements.each(function() {
-            const $element = $(this);
-            const originalHTML = $element.data('original-html') || $element.html();
-            $element.data('original-html', originalHTML);
+        searchableElements.forEach(element => {
+            const originalHTML = element.getAttribute('data-original-html') || element.innerHTML;
+            element.setAttribute('data-original-html', originalHTML);
             
             const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
             if (regex.test(originalHTML)) {
                 const highlightedHTML = originalHTML.replace(regex, '<mark class="search-highlight">$1</mark>');
-                $element.html(highlightedHTML);
+                element.innerHTML = highlightedHTML;
                 matchCount++;
             }
         });
         
         if (matchCount > 0) {
-            $('#searchResults').html(`<span class="text-success">✓ Found ${matchCount} matches for "${searchTerm}"</span>`);
-            $('html, body').animate({ scrollTop: $('.search-highlight').first().offset().top - 100 }, 500);
+            searchResults.innerHTML = `<span class="text-success">✓ Found ${matchCount} matches for "${searchTerm}"</span>`;
+            const firstHighlight = document.querySelector('.search-highlight');
+            if (firstHighlight) {
+                firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         } else {
-            $('#searchResults').html(`<span class="text-danger">✗ No matches found for "${searchTerm}"</span>`);
+            searchResults.innerHTML = `<span class="text-danger">✗ No matches found for "${searchTerm}"</span>`;
         }
         currentHighlight = searchTerm;
     }
-
-    // ===== THEME TOGGLE WITH LOCAL STORAGE =====
-function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeToggleBtn = document.getElementById('themeToggle');
-    
-    // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'night') {
-        document.body.classList.add('night');
-    }
-    
-    function toggleTheme() {
-        document.body.classList.toggle('night');
-        const isNight = document.body.classList.contains('night');
-        localStorage.setItem('theme', isNight ? 'night' : 'day');
-        console.log(`🌙 Theme changed to: ${isNight ? 'Night' : 'Day'}`);
-    }
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-    
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', toggleTheme);
-    }
-}
     
     function clearHighlight() {
         if (currentHighlight) {
-            $('[data-original-html]').each(function() {
-                const $element = $(this);
-                $element.html($element.data('original-html'));
+            const elements = document.querySelectorAll('[data-original-html]');
+            elements.forEach(element => {
+                element.innerHTML = element.getAttribute('data-original-html');
             });
-            $('#searchResults').html('');
-            $('#searchInput').val('');
+            searchResults.innerHTML = '';
+            searchInput.value = '';
             currentHighlight = null;
         }
     }
@@ -485,31 +740,25 @@ function initThemeToggle() {
     }
 }
 
+// ===== SCROLL PROGRESS BAR =====
 function initScrollProgressBar() {
-    if (typeof $ === 'undefined') return;
+    const progressBar = document.querySelector('.progress-bar');
     
-    const progressHTML = `
-        <div id="scrollProgressContainer">
-            <div id="scrollProgressBar"></div>
-        </div>
-    `;
+    if (!progressBar) return;
     
-    $('body').prepend(progressHTML);
-    
-    const $progressBar = $('#scrollProgressBar');
-    
-    $(window).on('scroll', function() {
-        const windowHeight = $(window).height();
-        const documentHeight = $(document).height();
-        const scrollTop = $(window).scrollTop();
+    window.addEventListener('scroll', function() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
         const roundedProgress = Math.min(100, Math.max(0, progress));
         
-        $progressBar.css('width', roundedProgress + '%');
+        progressBar.style.width = roundedProgress + '%';
         updateProgressColor(roundedProgress);
     });
-     function updateProgressColor(progress) {
+    
+    function updateProgressColor(progress) {
         let gradient;
         if (progress < 25) {
             gradient = 'linear-gradient(90deg, #ff6b6b, #ffd93d)';
@@ -520,12 +769,529 @@ function initScrollProgressBar() {
         } else {
             gradient = 'linear-gradient(90deg, #4d96ff, #9d4edd)';
         }
-        $progressBar.css('background', gradient);
+        progressBar.style.background = gradient;
     }
 }
 
-// ===== START EVERYTHING =====
-document.addEventListener('DOMContentLoaded', initializeAllFeatures);
-window.addEventListener('load', function() {
-    console.log("📦 Window fully loaded");
-});
+// ===== TOAST FUNCTION =====
+function showToast(message, type = 'info') {
+    const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+    
+    const toast = document.createElement('div');
+    toast.className = `toast show ${type}`;
+    toast.innerHTML = `
+        <div class="toast-body">
+            <strong>${message}</strong>
+        </div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+function createToastContainer() {
+    const container = document.createElement('div');
+    container.className = 'toast-container';
+    container.id = 'toastContainer';
+    document.body.appendChild(container);
+    return container;
+}owSlide(prevIndex);
+    }
+    
+    showSlide(0);
+    
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    setInterval(nextSlide, 5000);
+}
+
+// ===== RANDOM FACTS =====
+function initFacts() {
+    const factBtn = document.getElementById('factBtn');
+    const factArea = document.getElementById('factArea');
+    
+    if (!factBtn || !factArea) return;
+    
+    const facts = [
+        "SpongeBob's original name was 'SpongeBoy' but it was already trademarked!",
+        "The character of SpongeBob was created by marine biologist Stephen Hillenburg.",
+        "SpongeBob's laugh is actually a dolphin sound played backwards.",
+        "The Krusty Krab is modeled after a lobster trap.",
+        "SpongeBob has won multiple Emmy Awards for Outstanding Children's Animated Program.",
+        "Tom Kenny, the voice of SpongeBob, also voices Gary the Snail.",
+        "The show first aired on Nickelodeon on May 1, 1999.",
+        "SpongeBob's address is 124 Conch Street, Bikini Bottom.",
+        "Mr. Krabs' first name is Eugene.",
+        "Sandy Cheeks is from Texas and is a squirrel scientist."
+    ];
+    
+    factBtn.addEventListener('click', function() {
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        factArea.textContent = randomFact;
+        
+        factArea.style.opacity = '0';
+        setTimeout(() => {
+            factArea.style.opacity = '1';
+            factArea.style.transition = 'opacity 0.5s ease';
+        }, 100);
+    });
+}
+
+// ===== SUGGESTION FORM =====
+function initForm() {
+    const suggestForm = document.getElementById('suggestForm');
+    const resetBtn = document.getElementById('resetBtn');
+    const formMessage = document.getElementById('formMessage');
+    
+    if (!suggestForm || !resetBtn || !formMessage) return;
+    
+    suggestForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const episode = document.getElementById('episode').value;
+        const reason = document.getElementById('reason').value;
+        
+        if (name && episode) {
+            formMessage.textContent = `Thanks ${name}! We'll check out "${episode}"!`;
+            formMessage.style.color = 'green';
+            showToast(`Suggestion submitted for "${episode}"!`, 'success');
+        } else {
+            formMessage.textContent = 'Please fill in all required fields!';
+            formMessage.style.color = 'red';
+        }
+    });
+    
+    resetBtn.addEventListener('click', function() {
+        suggestForm.reset();
+        formMessage.textContent = '';
+    });
+}
+
+// ===== SAY HI FUNCTION =====
+function initSayHi() {
+    const sayHiBtn = document.getElementById('sayHiBtn');
+    const nameInput = document.getElementById('nameInput');
+    const greeting = document.getElementById('greeting');
+    
+    if (!sayHiBtn || !nameInput || !greeting) return;
+    
+    sayHiBtn.addEventListener('click', function() {
+        const name = nameInput.value || 'Friend';
+        greeting.textContent = `Ahoy, ${name}! Welcome to Bikini Bottom! 🏖️`;
+        
+        greeting.classList.add('floating');
+        setTimeout(() => {
+            greeting.classList.remove('floating');
+        }, 3000);
+    });
+}
+
+// ===== STATS COUNTER =====
+function initStatsCounter() {
+    const statSeasons = document.getElementById('statSeasons');
+    const statEpisodes = document.getElementById('statEpisodes');
+    const statYears = document.getElementById('statYears');
+    const statLanguages = document.getElementById('statLanguages');
+    
+    if (!statSeasons) return;
+    
+    const stats = {
+        seasons: 13,
+        episodes: 280,
+        years: 25,
+        languages: 60
+    };
+    
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateValue(statSeasons, 0, stats.seasons, 2000);
+                animateValue(statEpisodes, 0, stats.episodes, 2000);
+                animateValue(statYears, 0, stats.years, 2000);
+                animateValue(statLanguages, 0, stats.languages, 2000);
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    observer.observe(statSeasons.parentElement);
+}
+
+// ===== VOICE GREETING =====
+function initVoiceGreeting() {
+    const voiceBtn = document.getElementById('voiceGreeting');
+    const nameInput = document.getElementById('nameInput');
+    
+    if (!voiceBtn) return;
+    
+    voiceBtn.addEventListener('click', function() {
+        const name = nameInput.value || 'Friend';
+        const message = `Ahoy, ${name}! Welcome to Bikini Bottom!`;
+        
+        if ('speechSynthesis' in window) {
+            const speech = new SpeechSynthesisUtterance(message);
+            speech.rate = 0.9;
+            speech.pitch = 1.2;
+            window.speechSynthesis.speak(speech);
+        } else {
+            showToast('Voice synthesis not supported in your browser', 'warning');
+        }
+    });
+}
+
+// ===== CONFETTI EFFECT =====
+function initConfetti() {
+    const confettiBtn = document.getElementById('confettiBtn');
+    
+    if (!confettiBtn) return;
+    
+    confettiBtn.addEventListener('click', function() {
+        showToast('Celebration time! 🎉', 'success');
+        
+        for (let i = 0; i < 50; i++) {
+            createConfetti();
+        }
+    });
+    
+    function createConfetti() {
+        const confetti = document.createElement('div');
+        confetti.innerHTML = '🎉';
+        confetti.style.position = 'fixed';
+        confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-50px';
+        confetti.style.zIndex = '9999';
+        confetti.style.pointerEvents = 'none';
+        document.body.appendChild(confetti);
+        
+        const animation = confetti.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        animation.onfinish = () => confetti.remove();
+    }
+}
+
+// ===== EPISODES LIST =====
+function initEpisodes() {
+    const episodesList = document.getElementById('episodesList');
+    
+    if (!episodesList) return;
+    
+    const episodes = [
+        {
+            title: "Band Geeks",
+            season: "Season 2",
+            description: "Squidward tries to form a band for the Bubble Bowl."
+        },
+        {
+            title: "Chocolate with Nuts",
+            season: "Season 3", 
+            description: "SpongeBob and Patrick become chocolate bar salesmen."
+        },
+        {
+            title: "Pizza Delivery",
+            season: "Season 1",
+            description: "SpongeBob and Squidward deliver a pizza to a remote location."
+        },
+        {
+            title: "Graveyard Shift",
+            season: "Season 2",
+            description: "SpongeBob and Squidward work the night shift at the Krusty Krab."
+        }
+    ];
+    
+    episodes.forEach(episode => {
+        const episodeHTML = `
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">${episode.title}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${episode.season}</h6>
+                        <p class="card-text">${episode.description}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        episodesList.innerHTML += episodeHTML;
+    });
+}
+
+// ===== GIFS FEATURES =====
+function initGifsFeatures() {
+    const loadGifsBtn = document.getElementById('loadGifsBtn');
+    const toggleGifsBtn = document.getElementById('toggleGifsBtn');
+    
+    if (loadGifsBtn) {
+        loadGifsBtn.addEventListener('click', loadGifs);
+    }
+    
+    if (toggleGifsBtn) {
+        toggleGifsBtn.addEventListener('click', toggleGifs);
+    }
+    
+    setTimeout(loadGifs, 2000);
+}
+
+async function loadGifs() {
+    console.log("🔄 Loading GIFs...");
+    
+    const API_KEY = 'AIzaSyCQaEFcAOchzzxGrgsLhXl1ruFGVpbWCAo';
+    const characters = ['spongebob', 'patrick', 'squidward', 'mrkrabs', 'sandy', 'plankton'];
+    
+    const indicators = document.querySelectorAll('.gif-indicator');
+    indicators.forEach(indicator => {
+        indicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    });
+    
+    for (const character of characters) {
+        await loadCharacterGif(character, API_KEY);
+    }
+    
+    console.log("✅ GIFs loaded successfully");
+}
+
+async function loadCharacterGif(character, apiKey) {
+    try {
+        const characterCard = document.querySelector(`.character-card[data-character="${character}"]`);
+        if (!characterCard) return;
+        
+        const img = characterCard.querySelector('.character-img');
+        const indicator = characterCard.querySelector('.gif-indicator');
+        
+        if (!img.dataset.original) {
+            img.dataset.original = img.src;
+        }
+        
+        const searchTerms = {
+            'spongebob': 'spongebob squarepants funny',
+            'patrick': 'patrick star spongebob',
+            'squidward': 'squidward tentacles',
+            'mrkrabs': 'mr krabs money',
+            'sandy': 'sandy cheeks squirrel',
+            'plankton': 'plankton evil'
+        };
+        
+        const searchTerm = searchTerms[character] || character;
+        const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(searchTerm)}&key=${apiKey}&client_key=spongebob_site&limit=10`;
+        
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('API request failed');
+        
+        const data = await response.json();
+        
+        if (data.results && data.results.length > 0) {
+            const randomIndex = Math.floor(Math.random() * data.results.length);
+            const gifUrl = data.results[randomIndex].media_formats.gif.url;
+            
+            img.src = gifUrl;
+            img.dataset.currentType = 'gif';
+            
+            if (indicator) {
+                indicator.innerHTML = '<i class="fas fa-film text-success"></i> GIF Loaded';
+            }
+            
+            console.log(`✅ Loaded GIF for ${character}`);
+        } else {
+            throw new Error('No GIFs found');
+        }
+        
+    } catch (error) {
+        console.error(`❌ Failed to load GIF for ${character}:`, error);
+        const characterCard = document.querySelector(`.character-card[data-character="${character}"]`);
+        if (characterCard) {
+            const indicator = characterCard.querySelector('.gif-indicator');
+            if (indicator) {
+                indicator.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> Failed to load';
+            }
+        }
+    }
+}
+
+function toggleGifs() {
+    console.log("🔄 Toggling between GIFs and images");
+    
+    const characterCards = document.querySelectorAll('.character-card');
+    let hasGifs = false;
+    
+    characterCards.forEach(card => {
+        const img = card.querySelector('.character-img');
+        const indicator = card.querySelector('.gif-indicator');
+        
+        if (img && img.dataset.original) {
+            if (img.dataset.currentType === 'gif') {
+                img.src = img.dataset.original;
+                img.dataset.currentType = 'image';
+                if (indicator) {
+                    indicator.innerHTML = '<i class="fas fa-image"></i> Static Image';
+                }
+            } else {
+                const character = card.dataset.character;
+                if (character) {
+                    loadCharacterGif(character, 'AIzaSyCQaEFcAOchzzxGrgsLhXl1ruFGVpbWCAo');
+                    hasGifs = true;
+                }
+            }
+        }
+    });
+    
+    if (!hasGifs) {
+        loadGifs();
+    }
+}
+
+// ===== SEARCH HIGHLIGHTING =====
+function initSearchHighlighting() {
+    const searchBtn = document.getElementById('searchBtn');
+    const clearSearch = document.getElementById('clearSearch');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    
+    if (!searchBtn || !searchInput) return;
+    
+    let currentHighlight = null;
+    
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') performSearch(); 
+    });
+    
+    if (clearSearch) {
+        clearSearch.addEventListener('click', clearHighlight);
+    }
+    
+    function performSearch() {
+        const searchTerm = searchInput.value.trim();
+        if (!searchTerm) return;
+        
+        clearHighlight();
+        
+        const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, .card-text, .faq-item-improved');
+        let matchCount = 0;
+        
+        searchableElements.forEach(element => {
+            const originalHTML = element.getAttribute('data-original-html') || element.innerHTML;
+            element.setAttribute('data-original-html', originalHTML);
+            
+            const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+            if (regex.test(originalHTML)) {
+                const highlightedHTML = originalHTML.replace(regex, '<mark class="search-highlight">$1</mark>');
+                element.innerHTML = highlightedHTML;
+                matchCount++;
+            }
+        });
+        
+        if (matchCount > 0) {
+            searchResults.innerHTML = `<span class="text-success">✓ Found ${matchCount} matches for "${searchTerm}"</span>`;
+            const firstHighlight = document.querySelector('.search-highlight');
+            if (firstHighlight) {
+                firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            searchResults.innerHTML = `<span class="text-danger">✗ No matches found for "${searchTerm}"</span>`;
+        }
+        currentHighlight = searchTerm;
+    }
+    
+    function clearHighlight() {
+        if (currentHighlight) {
+            const elements = document.querySelectorAll('[data-original-html]');
+            elements.forEach(element => {
+                element.innerHTML = element.getAttribute('data-original-html');
+            });
+            searchResults.innerHTML = '';
+            searchInput.value = '';
+            currentHighlight = null;
+        }
+    }
+    
+    function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+}
+
+// ===== SCROLL PROGRESS BAR =====
+function initScrollProgressBar() {
+    const progressBar = document.querySelector('.progress-bar');
+    
+    if (!progressBar) return;
+    
+    window.addEventListener('scroll', function() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+        const roundedProgress = Math.min(100, Math.max(0, progress));
+        
+        progressBar.style.width = roundedProgress + '%';
+        updateProgressColor(roundedProgress);
+    });
+    
+    function updateProgressColor(progress) {
+        let gradient;
+        if (progress < 25) {
+            gradient = 'linear-gradient(90deg, #ff6b6b, #ffd93d)';
+        } else if (progress < 50) {
+            gradient = 'linear-gradient(90deg, #ffd93d, #6bcf7f)';
+        } else if (progress < 75) {
+            gradient = 'linear-gradient(90deg, #6bcf7f, #4d96ff)';
+        } else {
+            gradient = 'linear-gradient(90deg, #4d96ff, #9d4edd)';
+        }
+        progressBar.style.background = gradient;
+    }
+}
+
+// ===== TOAST FUNCTION =====
+function showToast(message, type = 'info') {
+    const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+    
+    const toast = document.createElement('div');
+    toast.className = `toast show ${type}`;
+    toast.innerHTML = `
+        <div class="toast-body">
+            <strong>${message}</strong>
+        </div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+function createToastContainer() {
+    const container = document.createElement('div');
+    container.className = 'toast-container';
+    container.id = 'toastContainer';
+    document.body.appendChild(container);
+    return container;
+}

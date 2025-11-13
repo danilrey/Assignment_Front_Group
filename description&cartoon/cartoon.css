@@ -544,3 +544,30 @@ nav {
     flex: 1;
     width: 100%;
 }
+
+.change-bg-btn {
+    background-color: #719870;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.change-bg-btn:hover {
+    background-color: #5a7a5a;
+}
+
+/* Те же самые стили для темы что и в Merch.css */
+body.night {
+    background: #2c3e50;
+    color: #f1f1f1;
+}
+
+body.night header {
+    background: #bfb66a !important;
+}
+
+/* и остальные стили из раздела выше */
